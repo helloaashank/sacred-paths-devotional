@@ -1,0 +1,80 @@
+[
+  {
+    "id": "1",
+    "title": "Bhagavad Gita",
+    "author": "Ved Vyasa",
+    "language": "Sanskrit/Hindi",
+    "category": "Scripture",
+    "pages": 700,
+    "year": 2023,
+    "price": 299,
+    "description": "The eternal dialogue between Lord Krishna and Arjuna on the battlefield of Kurukshetra. A timeless guide to dharma, karma, and spiritual wisdom.",
+    "coverImage": "/images/books/bhagavad-gita.jpg",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "title": "Ramayana",
+    "author": "Valmiki",
+    "language": "Hindi",
+    "category": "Epic",
+    "pages": 850,
+    "year": 2023,
+    "price": 399,
+    "description": "The epic tale of Lord Rama's journey, his exile, and the victory of dharma over adharma. A story of devotion, courage, and righteousness.",
+    "coverImage": "/images/books/ramayana.jpg",
+    "featured": true
+  },
+  {
+    "id": "3",
+    "title": "Shiva Purana",
+    "author": "Ved Vyasa",
+    "language": "Hindi",
+    "category": "Purana",
+    "pages": 600,
+    "year": 2022,
+    "price": 349,
+    "description": "Ancient texts describing the glory of Lord Shiva, his manifestations, and the path to liberation through devotion.",
+    "coverImage": "/images/books/shiva-purana.jpg",
+    "featured": false
+  },
+  {
+    "id": "4",
+    "title": "Hanuman Chalisa",
+    "author": "Tulsidas",
+    "language": "Hindi",
+    "category": "Devotional",
+    "pages": 120,
+    "year": 2023,
+    "price": 149,
+    "description": "Forty verses in praise of Lord Hanuman, offering strength, courage, and protection to devotees.",
+    "coverImage": "/images/books/hanuman-chalisa.jpg",
+    "featured": true
+  },
+  {
+    "id": "5",
+    "title": "Durga Saptashati",
+    "author": "Ved Vyasa",
+    "language": "Sanskrit",
+    "category": "Devotional",
+    "pages": 250,
+    "year": 2023,
+    "price": 199,
+    "description": "Seven hundred verses glorifying the Divine Mother, recounting her victories over demonic forces.",
+    "coverImage": "/images/books/durga-saptashati.jpg",
+    "featured": false
+  },
+  {
+    "id": "6",
+    "title": "Vishnu Sahasranama",
+    "author": "Ved Vyasa",
+    "language": "Sanskrit/Hindi",
+    "category": "Devotional",
+    "pages": 180,
+    "year": 2022,
+    "price": 179,
+    "description": "Thousand names of Lord Vishnu, each revealing a divine attribute and aspect of the Supreme Being.",
+    "coverImage": "/images/books/vishnu-sahasranama.jpg",
+    "featured": false
+  }
+]

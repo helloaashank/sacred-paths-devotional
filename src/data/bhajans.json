@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "title": "Om Jai Jagdish Hare",
+    "artist": "Traditional",
+    "duration": "4:23",
+    "category": "Aarti",
+    "language": "Hindi",
+    "deity": "Vishnu",
+    "audioFile": "/audio/om-jai-jagdish.mp3",
+    "lyrics": "Om Jai Jagdish Hare\nSwami Jai Jagdish Hare\nBhakt Jano Ke Sankat\nDas Jano Ke Sankat\nKshan Mein Door Kare\nOm Jai Jagdish Hare"
+  },
+  {
+    "id": "2",
+    "title": "Shiv Tandav Stotram",
+    "artist": "Ravana",
+    "duration": "6:45",
+    "category": "Stotra",
+    "language": "Sanskrit",
+    "deity": "Shiva",
+    "audioFile": "/audio/shiv-tandav.mp3",
+    "lyrics": "Jatatavigalajjala pravahapavitasthale\nGaleavalambya lambitam bhujangatungamalikam"
+  },
+  {
+    "id": "3",
+    "title": "Hanuman Chalisa",
+    "artist": "Tulsidas",
+    "duration": "8:12",
+    "category": "Chalisa",
+    "language": "Hindi",
+    "deity": "Hanuman",
+    "audioFile": "/audio/hanuman-chalisa.mp3",
+    "lyrics": "Shri Guru Charan Saroj Raj\nNijaman Mukur Sudhar\nBaranau Raghubar Bimal Jasu\nJo Dayak Phal Char"
+  },
+  {
+    "id": "4",
+    "title": "Krishna Bhajan",
+    "artist": "Traditional",
+    "duration": "5:30",
+    "category": "Bhajan",
+    "language": "Hindi",
+    "deity": "Krishna",
+    "audioFile": "/audio/krishna-bhajan.mp3",
+    "lyrics": "Hare Krishna Hare Krishna\nKrishna Krishna Hare Hare\nHare Rama Hare Rama\nRama Rama Hare Hare"
+  },
+  {
+    "id": "5",
+    "title": "Durga Aarti",
+    "artist": "Traditional",
+    "duration": "4:50",
+    "category": "Aarti",
+    "language": "Hindi",
+    "deity": "Durga",
+    "audioFile": "/audio/durga-aarti.mp3",
+    "lyrics": "Jai Ambe Gauri\nMaiya Jai Shyama Gauri\nTum Ko Nish Din Dhyavat\nHari Brahma Shivri"
+  },
+  {
+    "id": "6",
+    "title": "Ganesh Aarti",
+    "artist": "Traditional",
+    "duration": "3:45",
+    "category": "Aarti",
+    "language": "Hindi",
+    "deity": "Ganesha",
+    "audioFile": "/audio/ganesh-aarti.mp3",
+    "lyrics": "Jai Ganesh Jai Ganesh Jai Ganesh Deva\nMata Jaki Parvati Pita Mahadeva"
+  }
+]
