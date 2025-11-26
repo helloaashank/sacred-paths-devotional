@@ -1,0 +1,163 @@
+[
+  {
+    "id": "1",
+    "title": "Daily Morning Puja",
+    "duration": "30 minutes",
+    "deity": "All Deities",
+    "difficulty": "Beginner",
+    "description": "A comprehensive morning worship routine to start your day with divine blessings.",
+    "materials": [
+      "Copper or brass kalash (water pot)",
+      "Incense sticks (agarbatti)",
+      "Camphor (kapoor)",
+      "Fresh flowers",
+      "Fruits for offering",
+      "Kumkum and turmeric",
+      "Rice grains",
+      "Small diya with ghee"
+    ],
+    "steps": [
+      {
+        "title": "Preparation",
+        "description": "Take a bath and wear clean clothes. Clean the puja space thoroughly."
+      },
+      {
+        "title": "Lighting the Lamp",
+        "description": "Light the diya with ghee while chanting 'Om Jai Jagdish Hare'."
+      },
+      {
+        "title": "Water Offering",
+        "description": "Fill the kalash with clean water and offer to the deity."
+      },
+      {
+        "title": "Flower Offering",
+        "description": "Offer fresh flowers while chanting the deity's mantra."
+      },
+      {
+        "title": "Incense and Camphor",
+        "description": "Light incense sticks and camphor, moving them in circular motion."
+      },
+      {
+        "title": "Food Offering (Naivedya)",
+        "description": "Offer fruits and sweets to the deity."
+      },
+      {
+        "title": "Aarti",
+        "description": "Perform aarti with the diya and sing devotional songs."
+      },
+      {
+        "title": "Prayers",
+        "description": "Sit quietly and offer your prayers and gratitude."
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Ganesh Chaturthi Puja",
+    "duration": "2 hours",
+    "deity": "Ganesha",
+    "difficulty": "Intermediate",
+    "description": "Special worship for Lord Ganesha on Ganesh Chaturthi to remove obstacles and bring prosperity.",
+    "materials": [
+      "Ganesh idol or image",
+      "Red flowers (hibiscus preferred)",
+      "21 Modaks or laddoos",
+      "Durva grass (21 blades)",
+      "Red cloth",
+      "Incense and camphor",
+      "Coconut",
+      "Turmeric and kumkum",
+      "Fruits and sweets",
+      "Betel leaves and nuts"
+    ],
+    "steps": [
+      {
+        "title": "Idol Installation",
+        "description": "Place Ganesh idol on a clean platform covered with red cloth. Face it towards north or east."
+      },
+      {
+        "title": "Invocation (Avahan)",
+        "description": "Invoke Lord Ganesha with mantras and prayers."
+      },
+      {
+        "title": "Panchamrit Abhishek",
+        "description": "Bathe the idol with mixture of milk, curd, honey, ghee, and sugar."
+      },
+      {
+        "title": "Vastra (Cloth Offering)",
+        "description": "Offer red cloth and sacred thread."
+      },
+      {
+        "title": "Shodashopachara",
+        "description": "Perform 16 traditional offerings including flowers, incense, lamp, and food."
+      },
+      {
+        "title": "Durva and Modak Offering",
+        "description": "Offer 21 durva grass blades and 21 modaks with devotion."
+      },
+      {
+        "title": "Ganesh Aarti",
+        "description": "Perform aarti with camphor and sing 'Sukh Karta Dukh Harta'."
+      },
+      {
+        "title": "Prasad Distribution",
+        "description": "Distribute modaks and other offerings as prasad."
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Shiva Abhishek",
+    "duration": "45 minutes",
+    "deity": "Shiva",
+    "difficulty": "Intermediate",
+    "description": "Sacred bathing ritual of Shiva Lingam for peace, prosperity, and spiritual growth.",
+    "materials": [
+      "Shiva Lingam",
+      "Milk",
+      "Honey",
+      "Yogurt",
+      "Ghee",
+      "Sugar",
+      "Gangajal (holy water)",
+      "Bel leaves",
+      "White flowers",
+      "Rudraksha mala",
+      "Vibhuti (sacred ash)"
+    ],
+    "steps": [
+      {
+        "title": "Preparation",
+        "description": "Clean the Shiva Lingam and the worship area. Sit facing east."
+      },
+      {
+        "title": "Milk Abhishek",
+        "description": "Pour milk over the lingam while chanting 'Om Namah Shivaya'."
+      },
+      {
+        "title": "Yogurt Abhishek",
+        "description": "Pour yogurt as the second offering."
+      },
+      {
+        "title": "Honey Abhishek",
+        "description": "Pour honey slowly over the lingam."
+      },
+      {
+        "title": "Ghee and Sugar",
+        "description": "Offer ghee and sugar water in sequence."
+      },
+      {
+        "title": "Water Abhishek",
+        "description": "Pour clean water or Gangajal to cleanse the lingam."
+      },
+      {
+        "title": "Bel Patra Offering",
+        "description": "Offer bel leaves (in sets of 3) while chanting mantras."
+      },
+      {
+        "title": "Aarti and Prayers",
+        "description": "Perform aarti and recite Shiva mantras or Rudram."
+      }
+    ]
+  }
+]
