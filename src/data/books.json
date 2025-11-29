@@ -22,7 +22,7 @@
     "year": 2023,
     "price": 399,
     "description": "The epic tale of Lord Rama's journey, his exile, and the victory of dharma over adharma. A story of devotion, courage, and righteousness.",
-    "coverImage": "/images/books/ramayana.jpg",
+    "coverImage": "/images/books/ramayana.png",
     "featured": true
   },
   {
@@ -35,7 +35,7 @@
     "year": 2022,
     "price": 349,
     "description": "Ancient texts describing the glory of Lord Shiva, his manifestations, and the path to liberation through devotion.",
-    "coverImage": "/images/books/shiva-purana.jpg",
+    "coverImage": "/images/books/shiva-purana.png",
     "featured": false
   },
   {
