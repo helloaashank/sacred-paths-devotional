@@ -1,0 +1,17 @@
+This is a placeholder file for PDF books. Replace this with actual PDF files.
+
+To add PDFs for your books, place them in the public/pdfs directory with the following naming convention:
+- public/pdfs/1.pdf (for book with id "1" - Bhagavad Gita)
+- public/pdfs/2.pdf (for book with id "2" - Ramayana)
+- public/pdfs/3.pdf (for book with id "3" - Shiva Purana)
+- public/pdfs/4.pdf (for book with id "4" - Hanuman Chalisa)
+- public/pdfs/5.pdf (for book with id "5" - Durga Saptashati)
+- public/pdfs/6.pdf (for book with id "6" - Vishnu Sahasranama)
+
+The PDFReader component will automatically load the PDF based on the book ID.
+
+You can find free spiritual PDFs from:
+- Internet Archive (archive.org)
+- Project Gutenberg
+- Sacred-texts.com
+- And other public domain sources
