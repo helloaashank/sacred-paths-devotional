@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "books": "Books",
+    "bhajans": "Bhajans",
+    "panchang": "Panchang",
+    "vidhis": "Pooja Vidhis",
+    "cart": "Cart"
+  },
+  "home": {
+    "hero_title": "Aadhyatmik Gyan Ki Yatra",
+    "hero_subtitle": "Pavitra granthon, divya bhajans aur pracheen gyan ki khoj karein",
+    "explore": "Abhi Dekhein",
+    "featured_books": "Khaas Books",
+    "latest_bhajans": "Latest Bhajans",
+    "todays_panchang": "Aaj Ka Panchang"
+  },
+  "books": {
+    "title": "Pavitra Books",
+    "subtitle": "Aadhyatmik granthon aur pavitra shastron ka collection dekhein",
+    "category": "Category",
+    "all": "Sabhi",
+    "sort_by": "Sort Karein",
+    "title_sort": "Title",
+    "price_low": "Price: Kam Se Zyada",
+    "price_high": "Price: Zyada Se Kam",
+    "pages": "pages",
+    "view": "Dekhein",
+    "add_to_cart": "Cart Mein Dalein",
+    "no_books": "Is category mein koi book nahi mili.",
+    "description": "Vivaran",
+    "details": "Details",
+    "author": "Lekhak",
+    "language": "Bhasha",
+    "year": "Saal",
+    "read_pdf": "PDF Padhein"
+  },
+  "bhajans": {
+    "title": "Divya Bhajans",
+    "subtitle": "Pavitra bhajans aur bhakti geet sunein",
+    "category": "Category",
+    "all": "Sabhi",
+    "no_bhajans": "Is category mein koi bhajan nahi mila.",
+    "now_playing": "Ab Chal Raha Hai",
+    "lyrics": "Lyrics"
+  },
+  "panchang": {
+    "title": "Hindu Panchang",
+    "subtitle": "Daily jyotishiy calendar aur shubh samay",
+    "select_date": "Date Chunein",
+    "select_city": "City Chunein",
+    "tithi": "Tithi",
+    "nakshatra": "Nakshatra",
+    "yoga": "Yoga",
+    "karana": "Karana",
+    "sunrise": "Suryoday",
+    "sunset": "Suryast",
+    "moonrise": "Chandroday",
+    "moonset": "Chandrast",
+    "festivals": "Tyohaar"
+  },
+  "vidhis": {
+    "title": "Pooja Vidhis",
+    "subtitle": "Paramparik pooja anushthanon ke liye step-by-step guide",
+    "category": "Category",
+    "all": "Sabhi",
+    "no_vidhis": "Is category mein koi vidhi nahi mili.",
+    "duration": "Duration",
+    "materials": "Zaruri Saman",
+    "steps": "Steps"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Aapki cart khali hai",
+    "continue_shopping": "Shopping Jaari Rakhein",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Checkout Karein",
+    "remove": "Hataein",
+    "quantity": "Quantity"
+  },
+  "common": {
+    "loading": "Load Ho Raha Hai...",
+    "error": "Kuch Galat Ho Gaya",
+    "back": "Back",
+    "home": "Home"
+  }
+}

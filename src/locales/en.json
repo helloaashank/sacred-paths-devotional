@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "books": "Books",
+    "bhajans": "Bhajans",
+    "panchang": "Panchang",
+    "vidhis": "Pooja Vidhis",
+    "cart": "Cart"
+  },
+  "home": {
+    "hero_title": "Journey to Spiritual Enlightenment",
+    "hero_subtitle": "Discover sacred texts, divine bhajans, and ancient wisdom",
+    "explore": "Explore Now",
+    "featured_books": "Featured Books",
+    "latest_bhajans": "Latest Bhajans",
+    "todays_panchang": "Today's Panchang"
+  },
+  "books": {
+    "title": "Sacred Books",
+    "subtitle": "Explore our collection of spiritual texts and sacred scriptures",
+    "category": "Category",
+    "all": "All",
+    "sort_by": "Sort by",
+    "title_sort": "Title",
+    "price_low": "Price: Low to High",
+    "price_high": "Price: High to Low",
+    "pages": "pages",
+    "view": "View",
+    "add_to_cart": "Add to Cart",
+    "no_books": "No books found in this category.",
+    "description": "Description",
+    "details": "Details",
+    "author": "Author",
+    "language": "Language",
+    "year": "Year",
+    "read_pdf": "Read PDF"
+  },
+  "bhajans": {
+    "title": "Divine Bhajans",
+    "subtitle": "Listen to sacred hymns and devotional songs",
+    "category": "Category",
+    "all": "All",
+    "no_bhajans": "No bhajans found in this category.",
+    "now_playing": "Now Playing",
+    "lyrics": "Lyrics"
+  },
+  "panchang": {
+    "title": "Hindu Panchang",
+    "subtitle": "Daily astrological calendar and auspicious timings",
+    "select_date": "Select Date",
+    "select_city": "Select City",
+    "tithi": "Tithi",
+    "nakshatra": "Nakshatra",
+    "yoga": "Yoga",
+    "karana": "Karana",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "moonrise": "Moonrise",
+    "moonset": "Moonset",
+    "festivals": "Festivals"
+  },
+  "vidhis": {
+    "title": "Pooja Vidhis",
+    "subtitle": "Step-by-step guides for traditional worship rituals",
+    "category": "Category",
+    "all": "All",
+    "no_vidhis": "No vidhis found in this category.",
+    "duration": "Duration",
+    "materials": "Materials Required",
+    "steps": "Steps"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "continue_shopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "remove": "Remove",
+    "quantity": "Quantity"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "back": "Back",
+    "home": "Home"
+  }
+}

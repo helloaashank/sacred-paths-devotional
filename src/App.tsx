@@ -6,8 +6,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { CartProvider } from "./contexts/CartContext";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
+import BookDetail from "./pages/BookDetail";
+import Cart from "./pages/Cart";
 import Bhajans from "./pages/Bhajans";
 import Panchang from "./pages/Panchang";
 import Vidhis from "./pages/Vidhis";
@@ -40,24 +44,30 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <div className="flex flex-col min-h-screen">
-            <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-            <main className="flex-1">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/books" element={<Books />} />
-                <Route path="/bhajans" element={<Bhajans />} />
-                <Route path="/panchang" element={<Panchang />} />
-                <Route path="/vidhis" element={<Vidhis />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-        </BrowserRouter>
+        <LanguageProvider>
+          <CartProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <div className="flex flex-col min-h-screen">
+                <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+                <main className="flex-1">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/books" element={<Books />} />
+                    <Route path="/books/:id" element={<BookDetail />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/bhajans" element={<Bhajans />} />
+                    <Route path="/panchang" element={<Panchang />} />
+                    <Route path="/vidhis" element={<Vidhis />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
+            </BrowserRouter>
+          </CartProvider>
+        </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
