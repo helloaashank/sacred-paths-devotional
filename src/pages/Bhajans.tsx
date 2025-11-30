@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FiMusic, FiPlay, FiPause, FiSkipForward, FiSkipBack } from "react-icons/fi";
+import { FiMusic, FiPlay, FiPause } from "react-icons/fi";
 import bhajansData from "@/data/bhajans.json";
+import { AudioPlayer } from "@/components/AudioPlayer";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Bhajans = () => {
   const [currentPlaying, setCurrentPlaying] = useState<string | null>(null);
   const [filter, setFilter] = useState<string>("all");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const { t } = useLanguage();
 
   const categories = ["all", ...Array.from(new Set(bhajansData.map((bhajan) => bhajan.category)))];
 
@@ -15,8 +19,31 @@ const Bhajans = () => {
   );
 
   const togglePlay = (id: string) => {
-    setCurrentPlaying(currentPlaying === id ? null : id);
+    if (currentPlaying === id) {
+      setIsPlaying(!isPlaying);
+    } else {
+      setCurrentPlaying(id);
+      setIsPlaying(true);
+    }
   };
+
+  const handleNext = () => {
+    const currentIndex = filteredBhajans.findIndex((b) => b.id === currentPlaying);
+    if (currentIndex < filteredBhajans.length - 1) {
+      setCurrentPlaying(filteredBhajans[currentIndex + 1].id);
+      setIsPlaying(true);
+    }
+  };
+
+  const handlePrevious = () => {
+    const currentIndex = filteredBhajans.findIndex((b) => b.id === currentPlaying);
+    if (currentIndex > 0) {
+      setCurrentPlaying(filteredBhajans[currentIndex - 1].id);
+      setIsPlaying(true);
+    }
+  };
+
+  const currentBhajan = bhajansData.find((b) => b.id === currentPlaying);
 
   return (
     <div className="min-h-screen py-12 px-4">
@@ -25,10 +52,10 @@ const Bhajans = () => {
         <div className="mb-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 flex items-center justify-center gap-3">
             <FiMusic className="text-primary" />
-            Divine Bhajans
+            {t.bhajans.title}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Listen to devotional music and connect with the divine
+            {t.bhajans.subtitle}
           </p>
         </div>
 
@@ -59,21 +86,21 @@ const Bhajans = () => {
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
                   {/* Play Button */}
-                  <Button
-                    size="lg"
-                    onClick={() => togglePlay(bhajan.id)}
-                    className={`rounded-full h-14 w-14 flex-shrink-0 shadow-soft ${
-                      currentPlaying === bhajan.id
-                        ? "bg-gradient-hero animate-pulse"
-                        : "bg-gradient-hero"
-                    }`}
-                  >
-                    {currentPlaying === bhajan.id ? (
-                      <FiPause className="text-xl text-primary-foreground" />
-                    ) : (
-                      <FiPlay className="text-xl text-primary-foreground ml-1" />
-                    )}
-                  </Button>
+                    <Button
+                      size="lg"
+                      onClick={() => togglePlay(bhajan.id)}
+                      className={`rounded-full h-14 w-14 flex-shrink-0 shadow-soft ${
+                        currentPlaying === bhajan.id && isPlaying
+                          ? "bg-gradient-hero animate-pulse"
+                          : "bg-gradient-hero"
+                      }`}
+                    >
+                      {currentPlaying === bhajan.id && isPlaying ? (
+                        <FiPause className="text-xl text-primary-foreground" />
+                      ) : (
+                        <FiPlay className="text-xl text-primary-foreground ml-1" />
+                      )}
+                    </Button>
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
@@ -97,27 +124,21 @@ const Bhajans = () => {
                 {/* Lyrics Preview */}
                 {currentPlaying === bhajan.id && (
                   <div className="mt-6 pt-6 border-t border-border animate-fade-in">
-                    <h4 className="font-semibold text-foreground mb-3">Lyrics:</h4>
-                    <div className="bg-muted/50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-foreground mb-3">{t.bhajans.lyrics}:</h4>
+                    <div className="bg-muted/50 p-4 rounded-lg mb-4">
                       <p className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed">
                         {bhajan.lyrics}
                       </p>
                     </div>
 
-                    {/* Player Controls */}
-                    <div className="mt-4 flex items-center justify-center gap-4">
-                      <Button size="sm" variant="ghost" className="rounded-full">
-                        <FiSkipBack />
-                      </Button>
-                      <div className="flex-1 max-w-md">
-                        <div className="h-1 bg-muted rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-hero w-1/3 animate-pulse" />
-                        </div>
-                      </div>
-                      <Button size="sm" variant="ghost" className="rounded-full">
-                        <FiSkipForward />
-                      </Button>
-                    </div>
+                    {/* Audio Player */}
+                    <AudioPlayer
+                      audioFile={`/audio/${bhajan.id}.mp3`}
+                      isPlaying={isPlaying}
+                      onPlayPause={() => setIsPlaying(!isPlaying)}
+                      onNext={handleNext}
+                      onPrevious={handlePrevious}
+                    />
                   </div>
                 )}
               </CardContent>
@@ -127,7 +148,7 @@ const Bhajans = () => {
 
         {filteredBhajans.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-xl text-muted-foreground">No bhajans found in this category.</p>
+            <p className="text-xl text-muted-foreground">{t.bhajans.no_bhajans}</p>
           </div>
         )}
       </div>

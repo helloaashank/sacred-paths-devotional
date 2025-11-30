@@ -1,16 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FiCalendar, FiSun, FiMoon, FiMapPin } from "react-icons/fi";
 import panchangData from "@/data/panchang.json";
 import { format } from "date-fns";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 const Panchang = () => {
   const [selectedCity, setSelectedCity] = useState("delhi");
-  const [selectedDate] = useState("2025-01-15");
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const { t } = useLanguage();
+
+  // Auto-update to current device date/time
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSelectedDate(new Date());
+    }, 60000); // Update every minute
+
+    return () => clearInterval(timer);
+  }, []);
 
   const cityData = panchangData.cities.find((city) => city.id === selectedCity);
-  const dateData = panchangData.data[selectedDate]?.[selectedCity];
+  const formattedDate = format(selectedDate, "yyyy-MM-dd");
+  const dateData = panchangData.data[formattedDate]?.[selectedCity];
 
   return (
     <div className="min-h-screen py-12 px-4">
@@ -19,35 +34,71 @@ const Panchang = () => {
         <div className="mb-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 flex items-center justify-center gap-3">
             <FiCalendar className="text-primary" />
-            Panchang
+            {t.panchang.title}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Daily auspicious timings and Hindu calendar
+            {t.panchang.subtitle}
           </p>
         </div>
 
-        {/* City Selector */}
-        <Card className="mb-8 shadow-soft bg-gradient-card">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <FiMapPin className="text-primary" />
-              <h3 className="font-semibold text-foreground">Select City:</h3>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {panchangData.cities.map((city) => (
-                <Button
-                  key={city.id}
-                  variant={selectedCity === city.id ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setSelectedCity(city.id)}
-                  className={selectedCity === city.id ? "bg-gradient-hero shadow-soft" : ""}
-                >
-                  {city.name}
-                </Button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        {/* Date and City Selector */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {/* Date Picker */}
+          <Card className="shadow-soft bg-gradient-card">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <FiCalendar className="text-primary" />
+                <h3 className="font-semibold text-foreground">{t.panchang.select_date}:</h3>
+              </div>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !selectedDate && "text-muted-foreground"
+                    )}
+                  >
+                    <FiCalendar className="mr-2" />
+                    {selectedDate ? format(selectedDate, "PPP") : <span>Pick a date</span>}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0 bg-card z-50" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={(date) => date && setSelectedDate(date)}
+                    initialFocus
+                    className="pointer-events-auto"
+                  />
+                </PopoverContent>
+              </Popover>
+            </CardContent>
+          </Card>
+
+          {/* City Selector */}
+          <Card className="shadow-soft bg-gradient-card">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <FiMapPin className="text-primary" />
+                <h3 className="font-semibold text-foreground">{t.panchang.select_city}:</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {panchangData.cities.map((city) => (
+                  <Button
+                    key={city.id}
+                    variant={selectedCity === city.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedCity(city.id)}
+                    className={selectedCity === city.id ? "bg-gradient-hero shadow-soft" : ""}
+                  >
+                    {city.name}
+                  </Button>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {dateData ? (
           <div className="space-y-6">
@@ -56,7 +107,7 @@ const Panchang = () => {
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center gap-2">
                   <FiCalendar className="text-primary" />
-                  {format(new Date(selectedDate), "EEEE, MMMM d, yyyy")}
+                  {format(selectedDate, "EEEE, MMMM d, yyyy")}
                 </CardTitle>
                 <p className="text-muted-foreground">{cityData?.name}</p>
               </CardHeader>

@@ -1,0 +1,17 @@
+This is a placeholder file for bhajan audio. Replace this with actual MP3 audio files.
+
+For the bhajans to work properly, place MP3 files in the public/audio directory with the following naming convention:
+- public/audio/om-jai-jagdish.mp3 (for bhajan with id "om-jai-jagdish")
+- public/audio/shiv-tandav.mp3 (for bhajan with id "shiv-tandav")
+- public/audio/hanuman-chalisa.mp3 (for bhajan with id "hanuman-chalisa")
+- public/audio/krishna-bhajan.mp3 (for bhajan with id "krishna-bhajan")
+- public/audio/durga-aarti.mp3 (for bhajan with id "durga-aarti")
+- public/audio/ganesh-aarti.mp3 (for bhajan with id "ganesh-aarti")
+
+The AudioPlayer component will automatically load the audio based on the bhajan ID.
+
+You can find free devotional music from:
+- YouTube (download with appropriate permissions)
+- Archive.org
+- Free music repositories
+- Your own recordings
