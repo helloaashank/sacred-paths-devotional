@@ -133,7 +133,7 @@ const Bhajans = () => {
 
                     {/* Audio Player */}
                     <AudioPlayer
-                      audioFile={`/audio/${bhajan.id}.mp3`}
+                      audioFile={bhajan.audioFile}
                       isPlaying={isPlaying}
                       onPlayPause={() => setIsPlaying(!isPlaying)}
                       onNext={handleNext}
