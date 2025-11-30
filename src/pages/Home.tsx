@@ -63,8 +63,19 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featuredBooks.map((book) => (
               <Card key={book.id} className="group hover:shadow-elevated transition-all duration-300 overflow-hidden bg-gradient-card">
-                <div className="aspect-[3/4] bg-gradient-hero opacity-20 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
+                <div className="aspect-[3/4] relative overflow-hidden bg-muted">
+                  {book.coverImage ? (
+                    <img 
+                      src={book.coverImage} 
+                      alt={book.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                  ) : null}
+                  <div className={`absolute inset-0 flex items-center justify-center bg-gradient-hero opacity-20 ${book.coverImage ? 'hidden' : ''}`}>
                     <FiBook className="text-6xl text-primary/30" />
                   </div>
                 </div>
