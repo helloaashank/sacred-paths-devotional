@@ -76,8 +76,19 @@ const BookDetail = () => {
             <div className="grid md:grid-cols-2 gap-8">
               {/* Book Cover */}
               <Card className="overflow-hidden bg-gradient-card">
-                <div className="aspect-[3/4] bg-gradient-hero opacity-20 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
+                <div className="aspect-[3/4] relative overflow-hidden bg-muted">
+                  {book.coverImage ? (
+                    <img 
+                      src={book.coverImage} 
+                      alt={book.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                  ) : null}
+                  <div className={`absolute inset-0 flex items-center justify-center bg-gradient-hero opacity-20 ${book.coverImage ? 'hidden' : ''}`}>
                     <FiBook className="text-9xl text-primary/30" />
                   </div>
                 </div>
