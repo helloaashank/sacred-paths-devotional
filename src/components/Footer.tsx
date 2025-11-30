@@ -6,7 +6,7 @@ export const Footer = () => {
   return (
     <footer className="bg-card border-t border-border mt-auto">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2 text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
@@ -47,26 +47,26 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4 text-foreground">Company</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
-              <li><Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link></li>
+              <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
+              <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
 
           {/* Newsletter */}
-          <div>
+          <div className="lg:col-span-1">
             <h3 className="font-semibold mb-4 text-foreground">Stay Connected</h3>
             <p className="text-sm text-muted-foreground mb-4">
               Subscribe to receive spiritual insights and updates.
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 px-3 py-2 text-sm bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="flex-1 min-w-0 px-3 py-2 text-sm bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
-              <button className="px-4 py-2 text-sm font-medium bg-gradient-hero text-primary-foreground rounded-lg hover:opacity-90 transition-opacity">
+              <button className="px-4 py-2 text-sm font-medium bg-gradient-hero text-primary-foreground rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">
                 Subscribe
               </button>
             </div>

@@ -1,6 +1,6 @@
 This is a placeholder file for PDF books. Replace this with actual PDF files.
 
-To add PDFs for your books, place them in the public/pdfs directory with the following naming convention:
+To add PDFs for your books, place them in the public/pdfs directory with the following naming convention based on book IDs from books.json:
 - public/pdfs/1.pdf (for book with id "1" - Bhagavad Gita)
 - public/pdfs/2.pdf (for book with id "2" - Ramayana)
 - public/pdfs/3.pdf (for book with id "3" - Shiva Purana)
@@ -8,10 +8,15 @@ To add PDFs for your books, place them in the public/pdfs directory with the fol
 - public/pdfs/5.pdf (for book with id "5" - Durga Saptashati)
 - public/pdfs/6.pdf (for book with id "6" - Vishnu Sahasranama)
 
-The PDFReader component will automatically load the PDF based on the book ID.
+The PDF file name MUST match the book's ID (e.g., book with id "1" needs "1.pdf").
+
+The PDFReader component will automatically load the PDF as: /pdfs/[book-id].pdf
 
 You can find free spiritual PDFs from:
 - Internet Archive (archive.org)
-- Project Gutenberg
+- Project Gutenberg  
 - Sacred-texts.com
+- PDF Drive
 - And other public domain sources
+
+Note: Just like audio files, simply place your PDF files in the public/pdfs folder and name them according to the book ID.
