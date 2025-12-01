@@ -36,7 +36,15 @@ export const AudioPlayer = ({ audioFile, isPlaying, onPlayPause, onNext, onPrevi
     if (!audio) return;
 
     if (isPlaying) {
-      audio.play().catch(err => console.error("Audio play error:", err));
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          // Only log if it's not an AbortError (which happens during track changes)
+          if (err.name !== 'AbortError') {
+            console.error("Audio play error:", err);
+          }
+        });
+      }
     } else {
       audio.pause();
     }
@@ -44,9 +52,24 @@ export const AudioPlayer = ({ audioFile, isPlaying, onPlayPause, onNext, onPrevi
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio) {
-      audio.load();
-      setCurrentTime(0);
+    if (!audio) return;
+
+    // Pause current playback before loading new track
+    audio.pause();
+    audio.load();
+    setCurrentTime(0);
+
+    // If should be playing, wait for audio to be ready then play
+    if (isPlaying) {
+      const handleCanPlay = () => {
+        audio.play().catch(err => {
+          if (err.name !== 'AbortError') {
+            console.error("Audio play error:", err);
+          }
+        });
+        audio.removeEventListener('canplaythrough', handleCanPlay);
+      };
+      audio.addEventListener('canplaythrough', handleCanPlay);
     }
   }, [audioFile]);
 
