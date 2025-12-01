@@ -10,7 +10,22 @@ import { useAudio } from "@/contexts/AudioContext";
 const Bhajans = () => {
   const [filter, setFilter] = useState<string>("all");
   const { t } = useLanguage();
-  const { currentBhajan, isPlaying, playBhajan, togglePlay, playNext, playPrevious } = useAudio();
+  const { 
+    currentBhajan, 
+    isPlaying, 
+    volume,
+    isMuted,
+    isShuffled,
+    repeatMode,
+    playBhajan, 
+    togglePlay, 
+    playNext, 
+    playPrevious,
+    setVolume,
+    toggleMute,
+    toggleShuffle,
+    cycleRepeatMode
+  } = useAudio();
 
   const categories = ["all", ...Array.from(new Set(bhajansData.map((bhajan) => bhajan.category)))];
 
@@ -119,6 +134,18 @@ const Bhajans = () => {
                       onPlayPause={togglePlay}
                       onNext={playNext}
                       onPrevious={playPrevious}
+                      onEnded={playNext}
+                      volume={volume}
+                      onVolumeChange={setVolume}
+                      isMuted={isMuted}
+                      onMuteToggle={toggleMute}
+                      isShuffled={isShuffled}
+                      onShuffleToggle={toggleShuffle}
+                      repeatMode={repeatMode}
+                      onRepeatToggle={cycleRepeatMode}
+                      coverImage={`/images/books/${bhajan.deity.toLowerCase()}.jpg`}
+                      title={bhajan.title}
+                      artist={bhajan.artist}
                     />
                   </div>
                 )}
