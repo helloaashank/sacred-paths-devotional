@@ -5,12 +5,12 @@ import { FiMusic, FiPlay, FiPause } from "react-icons/fi";
 import bhajansData from "@/data/bhajans.json";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAudio } from "@/contexts/AudioContext";
 
 const Bhajans = () => {
-  const [currentPlaying, setCurrentPlaying] = useState<string | null>(null);
   const [filter, setFilter] = useState<string>("all");
-  const [isPlaying, setIsPlaying] = useState(false);
   const { t } = useLanguage();
+  const { currentBhajan, isPlaying, playBhajan, togglePlay, playNext, playPrevious } = useAudio();
 
   const categories = ["all", ...Array.from(new Set(bhajansData.map((bhajan) => bhajan.category)))];
 
@@ -18,32 +18,13 @@ const Bhajans = () => {
     (bhajan) => filter === "all" || bhajan.category === filter
   );
 
-  const togglePlay = (id: string) => {
-    if (currentPlaying === id) {
-      setIsPlaying(!isPlaying);
+  const handleBhajanClick = (bhajan: any) => {
+    if (currentBhajan?.id === bhajan.id) {
+      togglePlay();
     } else {
-      setCurrentPlaying(id);
-      setIsPlaying(true);
+      playBhajan(bhajan);
     }
   };
-
-  const handleNext = () => {
-    const currentIndex = filteredBhajans.findIndex((b) => b.id === currentPlaying);
-    if (currentIndex < filteredBhajans.length - 1) {
-      setCurrentPlaying(filteredBhajans[currentIndex + 1].id);
-      setIsPlaying(true);
-    }
-  };
-
-  const handlePrevious = () => {
-    const currentIndex = filteredBhajans.findIndex((b) => b.id === currentPlaying);
-    if (currentIndex > 0) {
-      setCurrentPlaying(filteredBhajans[currentIndex - 1].id);
-      setIsPlaying(true);
-    }
-  };
-
-  const currentBhajan = bhajansData.find((b) => b.id === currentPlaying);
 
   return (
     <div className="min-h-screen py-12 px-4">
@@ -80,7 +61,7 @@ const Bhajans = () => {
             <Card
               key={bhajan.id}
               className={`group hover:shadow-elevated transition-all duration-300 ${
-                currentPlaying === bhajan.id ? "ring-2 ring-primary shadow-elevated" : ""
+                currentBhajan?.id === bhajan.id ? "ring-2 ring-primary shadow-elevated" : ""
               }`}
             >
               <CardContent className="p-6">
@@ -88,14 +69,14 @@ const Bhajans = () => {
                   {/* Play Button */}
                     <Button
                       size="lg"
-                      onClick={() => togglePlay(bhajan.id)}
+                      onClick={() => handleBhajanClick(bhajan)}
                       className={`rounded-full h-14 w-14 flex-shrink-0 shadow-soft ${
-                        currentPlaying === bhajan.id && isPlaying
+                        currentBhajan?.id === bhajan.id && isPlaying
                           ? "bg-gradient-hero animate-pulse"
                           : "bg-gradient-hero"
                       }`}
                     >
-                      {currentPlaying === bhajan.id && isPlaying ? (
+                      {currentBhajan?.id === bhajan.id && isPlaying ? (
                         <FiPause className="text-xl text-primary-foreground" />
                       ) : (
                         <FiPlay className="text-xl text-primary-foreground ml-1" />
@@ -122,7 +103,7 @@ const Bhajans = () => {
                 </div>
 
                 {/* Lyrics Preview */}
-                {currentPlaying === bhajan.id && (
+                {currentBhajan?.id === bhajan.id && (
                   <div className="mt-6 pt-6 border-t border-border animate-fade-in">
                     <h4 className="font-semibold text-foreground mb-3">{t.bhajans.lyrics}:</h4>
                     <div className="bg-muted/50 p-4 rounded-lg mb-4">
@@ -135,9 +116,9 @@ const Bhajans = () => {
                     <AudioPlayer
                       audioFile={bhajan.audioFile}
                       isPlaying={isPlaying}
-                      onPlayPause={() => setIsPlaying(!isPlaying)}
-                      onNext={handleNext}
-                      onPrevious={handlePrevious}
+                      onPlayPause={togglePlay}
+                      onNext={playNext}
+                      onPrevious={playPrevious}
                     />
                   </div>
                 )}
