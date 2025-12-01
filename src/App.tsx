@@ -8,6 +8,8 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { CartProvider } from "./contexts/CartContext";
+import { AudioProvider } from "./contexts/AudioContext";
+import { MiniPlayer } from "./components/MiniPlayer";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
@@ -46,26 +48,29 @@ const App = () => {
       <TooltipProvider>
         <LanguageProvider>
           <CartProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <div className="flex flex-col min-h-screen">
-                <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-                <main className="flex-1">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/books" element={<Books />} />
-                    <Route path="/books/:id" element={<BookDetail />} />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/bhajans" element={<Bhajans />} />
-                    <Route path="/panchang" element={<Panchang />} />
-                    <Route path="/vidhis" element={<Vidhis />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </main>
-                <Footer />
-              </div>
-            </BrowserRouter>
+            <AudioProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <div className="flex flex-col min-h-screen">
+                  <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+                  <main className="flex-1 pb-24">
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/books" element={<Books />} />
+                      <Route path="/books/:id" element={<BookDetail />} />
+                      <Route path="/cart" element={<Cart />} />
+                      <Route path="/bhajans" element={<Bhajans />} />
+                      <Route path="/panchang" element={<Panchang />} />
+                      <Route path="/vidhis" element={<Vidhis />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </main>
+                  <Footer />
+                  <MiniPlayer />
+                </div>
+              </BrowserRouter>
+            </AudioProvider>
           </CartProvider>
         </LanguageProvider>
       </TooltipProvider>
