@@ -64,5 +64,16 @@
     "deity": "Ganesha",
     "audioFile": "/audio/ganesh-aarti.mp3",
     "lyrics": "Jai Ganesh Jai Ganesh Jai Ganesh Deva\nMata Jaki Parvati Pita Mahadeva"
+  },
+  {
+    "id": "7",
+    "title": "Shiv Shankar Stotram",
+    "artist": "Traditional",
+    "duration": "3:46",
+    "category": "bhajans",
+    "language": "Hindi",
+    "deity": "Shiv",
+    "audioFile": "/audio/Shiv Shankar Stotram.mp3",
+    "lyrics": "needs changes"
   }
 ]
