@@ -70,10 +70,21 @@
     "title": "Shiv Shankar Stotram",
     "artist": "Traditional",
     "duration": "3:46",
-    "category": "bhajans",
+    "category": "bhajan",
     "language": "Hindi",
     "deity": "Shiv",
     "audioFile": "/audio/Shiv Shankar Stotram.mp3",
+    "lyrics": "needs changes"
+  },
+  {
+    "id": "7",
+    "title": "Har Har Shambhu",
+    "artist": "Traditional",
+    "duration": "3:46",
+    "category": "bhajan",
+    "language": "Hindi",
+    "deity": "Shiv",
+    "audioFile": "/audio/Har Har Shambhu.mp3",
     "lyrics": "needs changes"
   }
 ]
