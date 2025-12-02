@@ -78,19 +78,19 @@ const Panchang = () => {
 
           {/* City Selector */}
           <Card className="shadow-soft bg-gradient-card">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-2 mb-4">
                 <FiMapPin className="text-primary" />
-                <h3 className="font-semibold text-foreground">{t.panchang.select_city}:</h3>
+                <h3 className="font-semibold text-sm sm:text-base text-foreground">{t.panchang.select_city}:</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
                 {panchangData.cities.map((city) => (
                   <Button
                     key={city.id}
                     variant={selectedCity === city.id ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedCity(city.id)}
-                    className={selectedCity === city.id ? "bg-gradient-hero shadow-soft" : ""}
+                    className={`text-xs sm:text-sm ${selectedCity === city.id ? "bg-gradient-hero shadow-soft" : ""}`}
                   >
                     {city.name}
                   </Button>

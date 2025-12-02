@@ -54,8 +54,8 @@ const App = () => {
               <BrowserRouter>
                 <div className="flex flex-col min-h-screen">
                   <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-                  <main className="flex-1 pb-24">
-                    <Routes>
+          <main className="flex-1 pb-20 sm:pb-24">
+            <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/books" element={<Books />} />
                       <Route path="/books/:id" element={<BookDetail />} />
