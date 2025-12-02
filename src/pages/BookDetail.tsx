@@ -73,7 +73,7 @@ const BookDetail = () => {
 
           {/* Book Details Tab */}
           <TabsContent value="details">
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               {/* Book Cover */}
               <Card className="overflow-hidden bg-gradient-card">
                 <div className="aspect-[3/4] relative overflow-hidden bg-muted">
@@ -95,29 +95,29 @@ const BookDetail = () => {
               </Card>
 
               {/* Book Info */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
-                  <h1 className="text-4xl font-bold text-foreground mb-2">{book.title}</h1>
-                  <p className="text-xl text-muted-foreground">{book.author}</p>
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">{book.title}</h1>
+                  <p className="text-lg sm:text-xl text-muted-foreground">{book.author}</p>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <span className="text-3xl font-bold text-primary">₹{book.price}</span>
-                  <span className="bg-muted px-3 py-1 rounded text-sm">{book.language}</span>
-                  <span className="bg-muted px-3 py-1 rounded text-sm">{book.pages} {t.books.pages}</span>
+                <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+                  <span className="text-2xl sm:text-3xl font-bold text-primary">₹{book.price}</span>
+                  <span className="bg-muted px-2 sm:px-3 py-1 rounded text-xs sm:text-sm whitespace-nowrap">{book.language}</span>
+                  <span className="bg-muted px-2 sm:px-3 py-1 rounded text-xs sm:text-sm whitespace-nowrap">{book.pages} {t.books.pages}</span>
                 </div>
 
                 <div className="space-y-2">
-                  <h2 className="text-xl font-semibold text-foreground">{t.books.description}</h2>
-                  <p className="text-muted-foreground leading-relaxed">{book.description}</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-foreground">{t.books.description}</h2>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{book.description}</p>
                 </div>
 
                 <Card className="bg-muted/50">
-                  <CardContent className="p-4 space-y-2">
-                    <h3 className="font-semibold text-foreground">{t.books.details}</h3>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
+                  <CardContent className="p-3 sm:p-4 space-y-2">
+                    <h3 className="font-semibold text-sm sm:text-base text-foreground">{t.books.details}</h3>
+                    <div className="grid grid-cols-2 gap-2 text-xs sm:text-sm">
                       <span className="text-muted-foreground">{t.books.author}:</span>
-                      <span className="text-foreground">{book.author}</span>
+                      <span className="text-foreground truncate">{book.author}</span>
                       <span className="text-muted-foreground">{t.books.language}:</span>
                       <span className="text-foreground">{book.language}</span>
                       <span className="text-muted-foreground">{t.books.pages}:</span>
@@ -128,10 +128,10 @@ const BookDetail = () => {
                   </CardContent>
                 </Card>
 
-                <div className="flex gap-4">
+                <div className="flex gap-3 sm:gap-4">
                   <Button
                     size="lg"
-                    className="flex-1 bg-gradient-hero shadow-soft"
+                    className="flex-1 bg-gradient-hero shadow-soft text-sm sm:text-base"
                     onClick={() =>
                       addToCart({
                         id: book.id,
@@ -141,8 +141,9 @@ const BookDetail = () => {
                       })
                     }
                   >
-                    <FiShoppingCart className="mr-2" />
-                    {t.books.add_to_cart}
+                    <FiShoppingCart className="mr-2 h-4 w-4" />
+                    <span className="hidden sm:inline">{t.books.add_to_cart}</span>
+                    <span className="sm:hidden">Add to Cart</span>
                   </Button>
                 </div>
               </div>

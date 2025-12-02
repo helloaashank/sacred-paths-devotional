@@ -168,9 +168,9 @@ export const AudioPlayer = ({
       
       {/* Album Art & Info */}
       {(coverImage || title) && (
-        <div className="flex items-center gap-4 animate-fade-in">
+        <div className="flex items-center gap-3 sm:gap-4 animate-fade-in">
           {coverImage && (
-            <div className="relative w-20 h-20 rounded-lg overflow-hidden shadow-elevated flex-shrink-0">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden shadow-elevated flex-shrink-0">
               <img 
                 src={coverImage} 
                 alt={title || 'Album art'} 
@@ -180,8 +180,8 @@ export const AudioPlayer = ({
           )}
           {title && (
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-foreground truncate">{title}</h3>
-              {artist && <p className="text-sm text-muted-foreground truncate">{artist}</p>}
+              <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">{title}</h3>
+              {artist && <p className="text-xs sm:text-sm text-muted-foreground truncate">{artist}</p>}
             </div>
           )}
         </div>
@@ -203,41 +203,41 @@ export const AudioPlayer = ({
       </div>
 
       {/* Main Controls */}
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center gap-1 sm:gap-2">
         {/* 10s Backward */}
         <Button 
           size="sm" 
           variant="ghost" 
-          className="rounded-full h-9 w-9 hover:bg-accent"
+          className="rounded-full h-8 w-8 sm:h-9 sm:w-9 hover:bg-accent"
           onClick={() => handleSkip(-10)}
           title="Rewind 10 seconds"
         >
-          <RotateCcw className="h-4 w-4" />
+          <RotateCcw className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         </Button>
 
         {/* Previous */}
         <Button 
           size="sm" 
           variant="ghost" 
-          className="rounded-full h-10 w-10 hover:bg-accent"
+          className="rounded-full h-9 w-9 sm:h-10 sm:w-10 hover:bg-accent"
           onClick={onPrevious}
           disabled={!onPrevious}
           title="Previous track"
         >
-          <SkipBack className="h-5 w-5" />
+          <SkipBack className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
         
         {/* Play/Pause */}
         <Button
           size="lg"
           onClick={onPlayPause}
-          className="rounded-full h-14 w-14 bg-gradient-hero shadow-elevated hover:shadow-soft transition-all hover:scale-105"
+          className="rounded-full h-12 w-12 sm:h-14 sm:w-14 bg-gradient-hero shadow-elevated hover:shadow-soft transition-all hover:scale-105 mx-1"
           title={isPlaying ? "Pause" : "Play"}
         >
           {isPlaying ? (
-            <Pause className="h-6 w-6 text-primary-foreground" />
+            <Pause className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
           ) : (
-            <Play className="h-6 w-6 text-primary-foreground ml-0.5" />
+            <Play className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground ml-0.5" />
           )}
         </Button>
 
@@ -245,40 +245,40 @@ export const AudioPlayer = ({
         <Button 
           size="sm" 
           variant="ghost" 
-          className="rounded-full h-10 w-10 hover:bg-accent"
+          className="rounded-full h-9 w-9 sm:h-10 sm:w-10 hover:bg-accent"
           onClick={onNext}
           disabled={!onNext}
           title="Next track"
         >
-          <SkipForward className="h-5 w-5" />
+          <SkipForward className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
         
         {/* 10s Forward */}
         <Button 
           size="sm" 
           variant="ghost" 
-          className="rounded-full h-9 w-9 hover:bg-accent"
+          className="rounded-full h-8 w-8 sm:h-9 sm:w-9 hover:bg-accent"
           onClick={() => handleSkip(10)}
           title="Forward 10 seconds"
         >
-          <RotateCw className="h-4 w-4" />
+          <RotateCw className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         </Button>
       </div>
 
       {/* Secondary Controls */}
-      <div className="flex items-center justify-between px-4">
+      <div className="flex items-center justify-between px-2 sm:px-4">
         {/* Left Side - Playback Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           {/* Shuffle */}
           {onShuffleToggle && (
             <Button
               size="sm"
               variant="ghost"
-              className={`rounded-full h-8 w-8 ${isShuffled ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'}`}
+              className={`rounded-full h-7 w-7 sm:h-8 sm:w-8 ${isShuffled ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'}`}
               onClick={onShuffleToggle}
               title={isShuffled ? "Shuffle on" : "Shuffle off"}
             >
-              <Shuffle className="h-4 w-4" />
+              <Shuffle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Button>
           )}
 
@@ -287,22 +287,22 @@ export const AudioPlayer = ({
             <Button
               size="sm"
               variant="ghost"
-              className={`rounded-full h-8 w-8 ${repeatMode !== 'off' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'}`}
+              className={`rounded-full h-7 w-7 sm:h-8 sm:w-8 ${repeatMode !== 'off' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'}`}
               onClick={onRepeatToggle}
               title={repeatMode === 'off' ? 'Repeat off' : repeatMode === 'all' ? 'Repeat all' : 'Repeat one'}
             >
-              <RepeatIcon className="h-4 w-4" />
+              <RepeatIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Button>
           )}
         </div>
 
         {/* Right Side - Volume Control */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <div className="relative">
             <Button
               size="sm"
               variant="ghost"
-              className="rounded-full h-8 w-8 text-muted-foreground hover:text-foreground"
+              className="rounded-full h-7 w-7 sm:h-8 sm:w-8 text-muted-foreground hover:text-foreground"
               onClick={() => {
                 if (onMuteToggle) {
                   onMuteToggle();
@@ -312,15 +312,15 @@ export const AudioPlayer = ({
               title={isMuted ? "Unmute" : "Mute"}
             >
               {isMuted ? (
-                <VolumeX className="h-4 w-4" />
+                <VolumeX className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               ) : (
-                <Volume2 className="h-4 w-4" />
+                <Volume2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               )}
             </Button>
             
             {showVolumeSlider && onVolumeChange && (
-              <div className="absolute bottom-full right-0 mb-2 bg-card border border-border rounded-lg p-3 shadow-elevated animate-scale-in">
-                <div className="w-32">
+              <div className="absolute bottom-full right-0 mb-2 bg-card border border-border rounded-lg p-2 sm:p-3 shadow-elevated animate-scale-in z-10">
+                <div className="w-24 sm:w-32">
                   <Slider
                     value={[isMuted ? 0 : volume * 100]}
                     max={100}

@@ -33,46 +33,56 @@ const Cart = () => {
         <div className="space-y-4 mb-8">
           {items.map((item) => (
             <Card key={item.id} className="bg-gradient-card">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex-1">
-                    <h3 className="font-bold text-lg text-foreground">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.author}</p>
-                    <p className="text-primary font-semibold mt-1">₹{item.price}</p>
+              <CardContent className="p-3 sm:p-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+                  {/* Item Info */}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-base sm:text-lg text-foreground truncate">{item.title}</h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground truncate">{item.author}</p>
+                    <p className="text-primary font-semibold mt-1 text-sm sm:text-base">₹{item.price}</p>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    >
-                      -
-                    </Button>
-                    <span className="w-12 text-center font-semibold">{item.quantity}</span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    >
-                      +
-                    </Button>
-                  </div>
+                  {/* Quantity and Actions */}
+                  <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
+                    {/* Quantity Controls */}
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        className="h-8 w-8 p-0"
+                      >
+                        -
+                      </Button>
+                      <span className="w-8 sm:w-12 text-center font-semibold text-sm sm:text-base">{item.quantity}</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="h-8 w-8 p-0"
+                      >
+                        +
+                      </Button>
+                    </div>
 
-                  <div className="text-right min-w-[80px]">
-                    <p className="font-bold text-lg text-foreground">
-                      ₹{item.price * item.quantity}
-                    </p>
-                  </div>
+                    {/* Price and Delete */}
+                    <div className="flex items-center gap-2 sm:gap-4">
+                      <div className="text-right min-w-[60px] sm:min-w-[80px]">
+                        <p className="font-bold text-base sm:text-lg text-foreground">
+                          ₹{item.price * item.quantity}
+                        </p>
+                      </div>
 
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-destructive hover:text-destructive"
-                  >
-                    <FiTrash2 />
-                  </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-destructive hover:text-destructive h-8 w-8"
+                      >
+                        <FiTrash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>

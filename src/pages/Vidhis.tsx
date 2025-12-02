@@ -31,20 +31,20 @@ const Vidhis = () => {
         <div className="space-y-6">
           {vidhisData.map((vidhi) => (
             <Card key={vidhi.id} className="shadow-soft hover:shadow-elevated transition-all bg-gradient-card">
-              <CardHeader>
+              <CardHeader className="p-4 sm:p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <CardTitle className="text-2xl mb-2">{vidhi.title}</CardTitle>
-                    <p className="text-muted-foreground mb-4">{vidhi.description}</p>
+                    <CardTitle className="text-xl sm:text-2xl mb-2">{vidhi.title}</CardTitle>
+                    <p className="text-sm sm:text-base text-muted-foreground mb-4">{vidhi.description}</p>
                     <div className="flex flex-wrap gap-2">
-                      <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="bg-primary/10 text-primary px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap">
                         {vidhi.deity}
                       </span>
-                      <span className="bg-muted text-muted-foreground px-3 py-1 rounded-full text-sm flex items-center gap-1">
+                      <span className="bg-muted text-muted-foreground px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm flex items-center gap-1 whitespace-nowrap">
                         <FiClock className="text-xs" />
                         {vidhi.duration}
                       </span>
-                      <span className="bg-muted text-muted-foreground px-3 py-1 rounded-full text-sm">
+                      <span className="bg-muted text-muted-foreground px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap">
                         {vidhi.difficulty}
                       </span>
                     </div>
@@ -52,19 +52,19 @@ const Vidhis = () => {
                 </div>
               </CardHeader>
 
-              <CardContent className="space-y-6">
+              <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 {/* Materials */}
                 <div>
-                  <h3 className="font-semibold text-lg text-foreground mb-3 flex items-center gap-2">
-                    <FiCheckCircle className="text-primary" />
+                  <h3 className="font-semibold text-base sm:text-lg text-foreground mb-3 flex items-center gap-2">
+                    <FiCheckCircle className="text-primary h-4 w-4 sm:h-5 sm:w-5" />
                     Required Materials
                   </h3>
-                  <div className="bg-muted/50 p-4 rounded-lg">
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <div className="bg-muted/50 p-3 sm:p-4 rounded-lg">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {vidhi.materials.map((material, index) => (
-                        <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
-                          <span className="text-primary mt-1">•</span>
-                          <span>{material}</span>
+                        <li key={index} className="text-xs sm:text-sm text-muted-foreground flex items-start gap-2">
+                          <span className="text-primary mt-0.5 sm:mt-1">•</span>
+                          <span className="break-words">{material}</span>
                         </li>
                       ))}
                     </ul>
@@ -87,16 +87,16 @@ const Vidhis = () => {
                         />
                       </Button>
                     </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-4 space-y-4 animate-accordion-down">
+                    <CollapsibleContent className="mt-4 space-y-3 sm:space-y-4 animate-accordion-down">
                       {vidhi.steps.map((step, index) => (
-                        <div key={index} className="bg-card p-4 rounded-lg border border-border shadow-soft">
-                          <div className="flex gap-3">
-                            <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-hero flex items-center justify-center shadow-soft">
-                              <span className="text-sm font-bold text-primary-foreground">{index + 1}</span>
+                        <div key={index} className="bg-card p-3 sm:p-4 rounded-lg border border-border shadow-soft">
+                          <div className="flex gap-2 sm:gap-3">
+                            <div className="flex-shrink-0 h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-gradient-hero flex items-center justify-center shadow-soft">
+                              <span className="text-xs sm:text-sm font-bold text-primary-foreground">{index + 1}</span>
                             </div>
-                            <div className="flex-1">
-                              <h4 className="font-semibold text-foreground mb-2">{step.title}</h4>
-                              <p className="text-sm text-muted-foreground leading-relaxed">
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-sm sm:text-base text-foreground mb-1 sm:mb-2">{step.title}</h4>
+                              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words">
                                 {step.description}
                               </p>
                             </div>

@@ -5,29 +5,29 @@ import { FiFacebook, FiTwitter, FiInstagram, FiYoutube } from "react-icons/fi";
 export const Footer = () => {
   return (
     <footer className="bg-card border-t border-border mt-auto">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Brand */}
-          <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2 text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-              <GiMeditation className="text-primary" />
+          <div className="space-y-3 sm:space-y-4">
+            <Link to="/" className="flex items-center gap-2 text-xl sm:text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
+              <GiMeditation className="text-primary h-6 w-6 sm:h-7 sm:w-7" />
               <span>SpiritualHub</span>
             </Link>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-xs sm:text-sm">
               Your gateway to spiritual wisdom, devotional music, and ancient traditions.
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <FiFacebook className="h-5 w-5" />
+                <FiFacebook className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <FiTwitter className="h-5 w-5" />
+                <FiTwitter className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <FiInstagram className="h-5 w-5" />
+                <FiInstagram className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <FiYoutube className="h-5 w-5" />
+                <FiYoutube className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
             </div>
           </div>
@@ -55,25 +55,25 @@ export const Footer = () => {
           </div>
 
           {/* Newsletter */}
-          <div className="lg:col-span-1">
-            <h3 className="font-semibold mb-4 text-foreground">Stay Connected</h3>
-            <p className="text-sm text-muted-foreground mb-4">
+          <div className="lg:col-span-1 sm:col-span-2">
+            <h3 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base text-foreground">Stay Connected</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
               Subscribe to receive spiritual insights and updates.
             </p>
             <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 min-w-0 px-3 py-2 text-sm bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="flex-1 min-w-0 px-3 py-2 text-xs sm:text-sm bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
-              <button className="px-4 py-2 text-sm font-medium bg-gradient-hero text-primary-foreground rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">
+              <button className="px-4 py-2 text-xs sm:text-sm font-medium bg-gradient-hero text-primary-foreground rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">
                 Subscribe
               </button>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+        <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border text-center text-xs sm:text-sm text-muted-foreground">
           <p>© 2025 SpiritualHub. All rights reserved. Built with devotion.</p>
         </div>
       </div>

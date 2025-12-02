@@ -39,29 +39,33 @@ const Books = () => {
         </div>
 
         {/* Filters */}
-        <div className="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between bg-card p-4 rounded-lg shadow-soft">
-          <div className="flex items-center gap-2 flex-wrap">
-            <FiFilter className="text-muted-foreground" />
-            <span className="text-sm font-medium text-foreground">{t.books.category}:</span>
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={filter === category ? "default" : "outline"}
-                size="sm"
-                onClick={() => setFilter(category)}
-                className={filter === category ? "bg-gradient-hero shadow-soft" : ""}
-              >
-                {category === "all" ? t.books.all : category.charAt(0).toUpperCase() + category.slice(1)}
-              </Button>
-            ))}
+        <div className="mb-8 flex flex-col gap-4 bg-card p-3 sm:p-4 rounded-lg shadow-soft">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <div className="flex items-center gap-2 text-sm font-medium text-foreground whitespace-nowrap">
+              <FiFilter className="text-muted-foreground" />
+              <span>{t.books.category}:</span>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              {categories.map((category) => (
+                <Button
+                  key={category}
+                  variant={filter === category ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setFilter(category)}
+                  className={`text-xs sm:text-sm ${filter === category ? "bg-gradient-hero shadow-soft" : ""}`}
+                >
+                  {category === "all" ? t.books.all : category.charAt(0).toUpperCase() + category.slice(1)}
+                </Button>
+              ))}
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-foreground">{t.books.sort_by}:</span>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-border">
+            <span className="text-sm font-medium text-foreground whitespace-nowrap">{t.books.sort_by}:</span>
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="px-3 py-1.5 text-sm bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full sm:w-auto px-3 py-2 text-sm bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="title">{t.books.title_sort}</option>
               <option value="price-low">{t.books.price_low}</option>
@@ -90,19 +94,19 @@ const Books = () => {
                   <FiBook className="text-6xl text-primary/30" />
                 </div>
               </div>
-              <CardContent className="p-4 space-y-2">
-                <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors line-clamp-2">
+              <CardContent className="p-3 sm:p-4 space-y-2">
+                <h3 className="font-bold text-base sm:text-lg text-foreground group-hover:text-primary transition-colors line-clamp-2">
                   {book.title}
                 </h3>
-                <p className="text-sm text-muted-foreground">{book.author}</p>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <span className="bg-muted px-2 py-1 rounded">{book.language}</span>
-                  <span className="bg-muted px-2 py-1 rounded">{book.pages} {t.books.pages}</span>
+                <p className="text-xs sm:text-sm text-muted-foreground truncate">{book.author}</p>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
+                  <span className="bg-muted px-2 py-1 rounded whitespace-nowrap">{book.language}</span>
+                  <span className="bg-muted px-2 py-1 rounded whitespace-nowrap">{book.pages} {t.books.pages}</span>
                 </div>
-                <p className="text-sm text-muted-foreground line-clamp-2">{book.description}</p>
-                <div className="flex items-center justify-between pt-2">
-                  <span className="text-lg font-bold text-primary">₹{book.price}</span>
-                  <div className="flex gap-2">
+                <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">{book.description}</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
+                  <span className="text-lg sm:text-xl font-bold text-primary">₹{book.price}</span>
+                  <div className="flex gap-2 w-full sm:w-auto">
                     <Button
                       size="sm"
                       variant="outline"
@@ -114,12 +118,14 @@ const Books = () => {
                           author: book.author,
                         })
                       }
+                      className="flex-1 sm:flex-none text-xs"
                     >
-                      <FiShoppingCart className="mr-1" />
-                      {t.books.add_to_cart}
+                      <FiShoppingCart className="mr-1 h-3 w-3" />
+                      <span className="hidden sm:inline">{t.books.add_to_cart}</span>
+                      <span className="sm:hidden">Cart</span>
                     </Button>
-                    <Link to={`/books/${book.id}`}>
-                      <Button size="sm" variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <Link to={`/books/${book.id}`} className="flex-1 sm:flex-none">
+                      <Button size="sm" variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors text-xs">
                         {t.books.view}
                       </Button>
                     </Link>

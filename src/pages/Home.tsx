@@ -13,27 +13,27 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
+      <section className="relative py-12 sm:py-16 md:py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-hero opacity-10" />
         <div className="container mx-auto relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground animate-fade-in">
+          <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground animate-fade-in leading-tight">
               Welcome to Your Spiritual Journey
             </h1>
-            <p className="text-xl text-muted-foreground animate-fade-in">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground animate-fade-in px-4">
               Discover sacred texts, devotional music, and ancient wisdom to enrich your spiritual path.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center animate-fade-in">
-              <Link to="/books">
-                <Button size="lg" className="bg-gradient-hero shadow-soft hover:shadow-elevated transition-all">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in px-4">
+              <Link to="/books" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto bg-gradient-hero shadow-soft hover:shadow-elevated transition-all text-sm sm:text-base">
                   Explore Books
-                  <FiArrowRight className="ml-2" />
+                  <FiArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link to="/bhajans">
-                <Button size="lg" variant="outline" className="shadow-soft hover:shadow-elevated transition-all">
+              <Link to="/bhajans" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto shadow-soft hover:shadow-elevated transition-all text-sm sm:text-base">
                   Listen to Bhajans
-                  <FiMusic className="ml-2" />
+                  <FiMusic className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>
@@ -42,20 +42,20 @@ const Home = () => {
       </section>
 
       {/* Featured Books */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-12 sm:py-16 px-4 bg-muted/30">
         <div className="container mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-foreground flex items-center gap-3">
-                <FiBook className="text-primary" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground flex items-center gap-2 sm:gap-3">
+                <FiBook className="text-primary h-6 w-6 sm:h-7 sm:w-7" />
                 Featured Books
               </h2>
-              <p className="text-muted-foreground mt-2">Sacred texts and spiritual wisdom</p>
+              <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">Sacred texts and spiritual wisdom</p>
             </div>
             <Link to="/books">
-              <Button variant="ghost" className="group">
+              <Button variant="ghost" className="group text-sm sm:text-base">
                 View All
-                <FiArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                <FiArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
