@@ -10,6 +10,8 @@ interface Bhajan {
   language: string;
   deity: string;
   audioFile: string;
+  thumbnail?: string;
+  lrcFile?: string;
   lyrics: string;
 }
 
@@ -20,12 +22,14 @@ interface AudioContextType {
   isMuted: boolean;
   isShuffled: boolean;
   repeatMode: 'off' | 'all' | 'one';
+  currentTime: number;
   setCurrentBhajan: (bhajan: Bhajan | null) => void;
   setIsPlaying: (playing: boolean) => void;
   setVolume: (volume: number) => void;
   setIsMuted: (muted: boolean) => void;
   setIsShuffled: (shuffled: boolean) => void;
   setRepeatMode: (mode: 'off' | 'all' | 'one') => void;
+  setCurrentTime: (time: number) => void;
   playBhajan: (bhajan: Bhajan) => void;
   togglePlay: () => void;
   playNext: () => void;
@@ -44,10 +48,12 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [isShuffled, setIsShuffled] = useState(false);
   const [repeatMode, setRepeatMode] = useState<'off' | 'all' | 'one'>('off');
+  const [currentTime, setCurrentTime] = useState(0);
 
   const playBhajan = (bhajan: Bhajan) => {
     setCurrentBhajan(bhajan);
     setIsPlaying(true);
+    setCurrentTime(0);
   };
 
   const togglePlay = () => {
@@ -95,6 +101,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const playNext = () => {
     const nextBhajan = getNextBhajan();
     if (nextBhajan) {
+      setCurrentTime(0);
       setCurrentBhajan(nextBhajan);
       setIsPlaying(true);
     }
@@ -103,6 +110,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const playPrevious = () => {
     if (!currentBhajan) return;
     const currentIndex = bhajansData.findIndex((b) => b.id === currentBhajan.id);
+    setCurrentTime(0);
     if (currentIndex > 0) {
       setCurrentBhajan(bhajansData[currentIndex - 1] as Bhajan);
       setIsPlaying(true);
@@ -121,12 +129,14 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
         isMuted,
         isShuffled,
         repeatMode,
+        currentTime,
         setCurrentBhajan,
         setIsPlaying,
         setVolume,
         setIsMuted,
         setIsShuffled,
         setRepeatMode,
+        setCurrentTime,
         playBhajan,
         togglePlay,
         playNext,

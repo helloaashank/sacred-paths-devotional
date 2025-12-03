@@ -8,6 +8,8 @@
     "language": "Hindi",
     "deity": "Vishnu",
     "audioFile": "/audio/om-jai-jagdish.mp3",
+    "thumbnail": "/thumbnails/bhajans/om-jai-jagdish.jpg",
+    "lrcFile": "/lyrics/om-jai-jagdish.lrc",
     "lyrics": "Om Jai Jagdish Hare\nSwami Jai Jagdish Hare\nBhakt Jano Ke Sankat\nDas Jano Ke Sankat\nKshan Mein Door Kare\nOm Jai Jagdish Hare"
   },
   {
@@ -19,6 +21,8 @@
     "language": "Sanskrit",
     "deity": "Shiva",
     "audioFile": "/audio/shiv-tandav.mp3",
+    "thumbnail": "/thumbnails/bhajans/shiv-tandav.jpg",
+    "lrcFile": "/lyrics/shiv-tandav.lrc",
     "lyrics": "Jatatavigalajjala pravahapavitasthale\nGaleavalambya lambitam bhujangatungamalikam"
   },
   {
@@ -30,6 +34,8 @@
     "language": "Hindi",
     "deity": "Hanuman",
     "audioFile": "/audio/hanuman-chalisa.mp3",
+    "thumbnail": "/thumbnails/bhajans/hanuman-chalisa.jpg",
+    "lrcFile": "/lyrics/hanuman-chalisa.lrc",
     "lyrics": "Shri Guru Charan Saroj Raj\nNijaman Mukur Sudhar\nBaranau Raghubar Bimal Jasu\nJo Dayak Phal Char"
   },
   {
@@ -41,6 +47,8 @@
     "language": "Hindi",
     "deity": "Krishna",
     "audioFile": "/audio/krishna-bhajan.mp3",
+    "thumbnail": "/thumbnails/bhajans/krishna-bhajan.jpg",
+    "lrcFile": "/lyrics/krishna-bhajan.lrc",
     "lyrics": "Hare Krishna Hare Krishna\nKrishna Krishna Hare Hare\nHare Rama Hare Rama\nRama Rama Hare Hare"
   },
   {
@@ -52,6 +60,8 @@
     "language": "Hindi",
     "deity": "Durga",
     "audioFile": "/audio/durga-aarti.mp3",
+    "thumbnail": "/thumbnails/bhajans/durga-aarti.jpg",
+    "lrcFile": "/lyrics/durga-aarti.lrc",
     "lyrics": "Jai Ambe Gauri\nMaiya Jai Shyama Gauri\nTum Ko Nish Din Dhyavat\nHari Brahma Shivri"
   },
   {
@@ -63,6 +73,8 @@
     "language": "Hindi",
     "deity": "Ganesha",
     "audioFile": "/audio/ganesh-aarti.mp3",
+    "thumbnail": "/thumbnails/bhajans/ganesh-aarti.jpg",
+    "lrcFile": "/lyrics/ganesh-aarti.lrc",
     "lyrics": "Jai Ganesh Jai Ganesh Jai Ganesh Deva\nMata Jaki Parvati Pita Mahadeva"
   },
   {
@@ -74,6 +86,8 @@
     "language": "Hindi",
     "deity": "Shiv",
     "audioFile": "/audio/Shiv Shankar Stotram.mp3",
+    "thumbnail": "/thumbnails/bhajans/shiv-shankar-stotram.jpg",
+    "lrcFile": "/lyrics/shiv-shankar-stotram.lrc",
     "lyrics": "needs changes"
   },
   {
@@ -85,6 +99,8 @@
     "language": "Hindi",
     "deity": "Shiv",
     "audioFile": "/audio/Har Har Shambhu.mp3",
+    "thumbnail": "/thumbnails/bhajans/har-har-shambhu.jpg",
+    "lrcFile": "/lyrics/har-har-shambhu.lrc",
     "lyrics": "needs changes"
   }
 ]
