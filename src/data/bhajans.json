@@ -102,5 +102,18 @@
     "thumbnail": "/thumbnails/bhajans/har-har-shambhu.jpg",
     "lrcFile": "/lyrics/har-har-shambhu.lrc",
     "lyrics": "needs changes"
+  },
+  {
+    "id": "9",
+    "title": "Raam Aayenge",
+    "artist": "Traditional",
+    "duration": "3:46",
+    "category": "bhajan",
+    "language": "Hindi",
+    "deity": "Shiv",
+    "audioFile": "/audio/Raam Aayenge.mp3",
+    "thumbnail": "/thumbnails/bhajans/Raam Aayenge.jpg",
+    "lrcFile": "/lyrics/Raam Aayenge.lrc",
+    "lyrics": "needs changes"
   }
 ]
