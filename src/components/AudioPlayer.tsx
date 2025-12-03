@@ -33,6 +33,7 @@ interface AudioPlayerProps {
   coverImage?: string;
   title?: string;
   artist?: string;
+  onTimeUpdate?: (currentTime: number) => void;
 }
 
 export const AudioPlayer = ({ 
@@ -52,7 +53,8 @@ export const AudioPlayer = ({
   onRepeatToggle,
   coverImage,
   title,
-  artist
+  artist,
+  onTimeUpdate
 }: AudioPlayerProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [currentTime, setCurrentTime] = useState(0);
@@ -63,27 +65,33 @@ export const AudioPlayer = ({
     const audio = audioRef.current;
     if (!audio) return;
 
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
+    const updateTime = () => {
+      setCurrentTime(audio.currentTime);
+      onTimeUpdate?.(audio.currentTime);
+    };
+    const updateDuration = () => setDuration(audio.duration || 0);
     const handleEnded = () => {
       if (repeatMode === 'one') {
         audio.currentTime = 0;
-        audio.play();
+        audio.play().catch(() => {});
       } else if (onEnded) {
-        onEnded();
+        // Small delay to ensure state is preserved before moving to next track
+        setTimeout(() => onEnded(), 50);
       }
     };
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("loadedmetadata", updateDuration);
+    audio.addEventListener("durationchange", updateDuration);
     audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("loadedmetadata", updateDuration);
+      audio.removeEventListener("durationchange", updateDuration);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [repeatMode, onEnded]);
+  }, [repeatMode, onEnded, onTimeUpdate]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -144,7 +152,10 @@ export const AudioPlayer = ({
   const handleSkip = (seconds: number) => {
     const audio = audioRef.current;
     if (audio) {
-      audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+      const maxTime = audio.duration || Infinity;
+      const newTime = Math.max(0, Math.min(maxTime, audio.currentTime + seconds));
+      audio.currentTime = newTime;
+      setCurrentTime(newTime);
     }
   };
 
