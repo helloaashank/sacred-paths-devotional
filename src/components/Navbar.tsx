@@ -31,12 +31,13 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
 
   return (
     <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border shadow-soft">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+      <div className="container mx-auto px-3 sm:px-4">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-            <GiMeditation className="text-primary" />
-            <span>SpiritualHub</span>
+          <Link to="/" className="flex items-center gap-1.5 sm:gap-2 text-lg sm:text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent flex-shrink-0">
+            <GiMeditation className="text-primary h-5 w-5 sm:h-6 sm:w-6" />
+            <span className="hidden xs:inline">SpiritualHub</span>
+            <span className="xs:hidden">SH</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -60,14 +61,15 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* Language - Hidden on very small screens */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" className="hidden sm:flex text-xs sm:text-sm px-2 sm:px-3">
                   {languageLabels[language]}
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent className="bg-card border-border z-50">
                 <DropdownMenuItem onClick={() => setLanguage("en")}>
                   English
                 </DropdownMenuItem>
@@ -81,10 +83,10 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
             </DropdownMenu>
 
             <Link to="/cart">
-              <Button variant="ghost" size="icon" className="relative">
-                <FiShoppingCart className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="relative h-8 w-8 sm:h-9 sm:w-9">
+                <FiShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
                 {itemCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-primary text-primary-foreground text-xs">
+                  <Badge className="absolute -top-1 -right-1 h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center p-0 bg-primary text-primary-foreground text-[10px] sm:text-xs">
                     {itemCount}
                   </Badge>
                 )}
@@ -95,18 +97,18 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
               variant="ghost"
               size="icon"
               onClick={toggleDarkMode}
-              className="rounded-full"
+              className="rounded-full h-8 w-8 sm:h-9 sm:w-9"
             >
-              {darkMode ? <FiSun className="h-5 w-5" /> : <FiMoon className="h-5 w-5" />}
+              {darkMode ? <FiSun className="h-4 w-4 sm:h-5 sm:w-5" /> : <FiMoon className="h-4 w-4 sm:h-5 sm:w-5" />}
             </Button>
 
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden h-8 w-8 sm:h-9 sm:w-9"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <FiMenu className="h-5 w-5" />
+              <FiMenu className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </div>
         </div>
