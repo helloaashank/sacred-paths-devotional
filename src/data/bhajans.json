@@ -10,7 +10,17 @@
     "audioFile": "/audio/om-jai-jagdish.mp3",
     "thumbnail": "/thumbnails/bhajans/om-jai-jagdish.jpg",
     "lrcFile": "/lyrics/om-jai-jagdish.lrc",
-    "lyrics": "Om Jai Jagdish Hare\nSwami Jai Jagdish Hare\nBhakt Jano Ke Sankat\nDas Jano Ke Sankat\nKshan Mein Door Kare\nOm Jai Jagdish Hare"
+    "lyrics": "Om Jai Jagdish Hare\nSwami Jai Jagdish Hare\nBhakt Jano Ke Sankat\nDas Jano Ke Sankat\nKshan Mein Door Kare\nOm Jai Jagdish Hare",
+    "credits": {
+      "singers": ["Traditional"],
+      "label": "Unknown",
+      "producer": "Unknown",
+      "lyricist": "Traditional",
+      "composer": "Traditional",
+      "copyright": "Public Domain",
+      "year": "Ancient",
+      "source": "Traditional"
+    }
   },
   {
     "id": "2",
@@ -23,7 +33,17 @@
     "audioFile": "/audio/shiv-tandav.mp3",
     "thumbnail": "/thumbnails/bhajans/shiv-tandav.jpg",
     "lrcFile": "/lyrics/shiv-tandav.lrc",
-    "lyrics": "Jatatavigalajjala pravahapavitasthale\nGaleavalambya lambitam bhujangatungamalikam"
+    "lyrics": "Jatatavigalajjala pravahapavitasthale\nGaleavalambya lambitam bhujangatungamalikam",
+    "credits": {
+      "singers": ["Various Artists"],
+      "label": "Unknown",
+      "producer": "Unknown",
+      "lyricist": "Ravana",
+      "composer": "Traditional",
+      "copyright": "Public Domain",
+      "year": "Ancient",
+      "source": "Traditional"
+    }
   },
   {
     "id": "3",
@@ -36,7 +56,17 @@
     "audioFile": "/audio/hanuman-chalisa.mp3",
     "thumbnail": "/thumbnails/bhajans/hanuman-chalisa.jpg",
     "lrcFile": "/lyrics/hanuman-chalisa.lrc",
-    "lyrics": "Shri Guru Charan Saroj Raj\nNijaman Mukur Sudhar\nBaranau Raghubar Bimal Jasu\nJo Dayak Phal Char"
+    "lyrics": "Shri Guru Charan Saroj Raj\nNijaman Mukur Sudhar\nBaranau Raghubar Bimal Jasu\nJo Dayak Phal Char",
+    "credits": {
+      "singers": ["Various Artists"],
+      "label": "Unknown",
+      "producer": "Unknown",
+      "lyricist": "Tulsidas",
+      "composer": "Traditional",
+      "copyright": "Public Domain",
+      "year": "16th Century",
+      "source": "Traditional"
+    }
   },
   {
     "id": "4",
@@ -49,7 +79,17 @@
     "audioFile": "/audio/krishna-bhajan.mp3",
     "thumbnail": "/thumbnails/bhajans/krishna-bhajan.jpg",
     "lrcFile": "/lyrics/krishna-bhajan.lrc",
-    "lyrics": "Hare Krishna Hare Krishna\nKrishna Krishna Hare Hare\nHare Rama Hare Rama\nRama Rama Hare Hare"
+    "lyrics": "Hare Krishna Hare Krishna\nKrishna Krishna Hare Hare\nHare Rama Hare Rama\nRama Rama Hare Hare",
+    "credits": {
+      "singers": ["Traditional"],
+      "label": "Unknown",
+      "producer": "Unknown",
+      "lyricist": "Traditional",
+      "composer": "Traditional",
+      "copyright": "Public Domain",
+      "year": "Ancient",
+      "source": "Traditional"
+    }
   },
   {
     "id": "5",
@@ -62,7 +102,17 @@
     "audioFile": "/audio/durga-aarti.mp3",
     "thumbnail": "/thumbnails/bhajans/durga-aarti.jpg",
     "lrcFile": "/lyrics/durga-aarti.lrc",
-    "lyrics": "Jai Ambe Gauri\nMaiya Jai Shyama Gauri\nTum Ko Nish Din Dhyavat\nHari Brahma Shivri"
+    "lyrics": "Jai Ambe Gauri\nMaiya Jai Shyama Gauri\nTum Ko Nish Din Dhyavat\nHari Brahma Shivri",
+    "credits": {
+      "singers": ["Traditional"],
+      "label": "Unknown",
+      "producer": "Unknown",
+      "lyricist": "Traditional",
+      "composer": "Traditional",
+      "copyright": "Public Domain",
+      "year": "Ancient",
+      "source": "Traditional"
+    }
   },
   {
     "id": "6",
@@ -75,7 +125,17 @@
     "audioFile": "/audio/ganesh-aarti.mp3",
     "thumbnail": "/thumbnails/bhajans/ganesh-aarti.jpg",
     "lrcFile": "/lyrics/ganesh-aarti.lrc",
-    "lyrics": "Jai Ganesh Jai Ganesh Jai Ganesh Deva\nMata Jaki Parvati Pita Mahadeva"
+    "lyrics": "Jai Ganesh Jai Ganesh Jai Ganesh Deva\nMata Jaki Parvati Pita Mahadeva",
+    "credits": {
+      "singers": ["Traditional"],
+      "label": "Unknown",
+      "producer": "Unknown",
+      "lyricist": "Traditional",
+      "composer": "Traditional",
+      "copyright": "Public Domain",
+      "year": "Ancient",
+      "source": "Traditional"
+    }
   },
   {
     "id": "7",
@@ -88,12 +148,22 @@
     "audioFile": "/audio/Shiv Shankar Stotram.mp3",
     "thumbnail": "/thumbnails/bhajans/shiv-shankar-stotram.jpg",
     "lrcFile": "/lyrics/shiv-shankar-stotram.lrc",
-    "lyrics": "needs changes"
+    "lyrics": "needs changes",
+    "credits": {
+      "singers": ["Unknown"],
+      "label": "Unknown",
+      "producer": "Unknown",
+      "lyricist": "Traditional",
+      "composer": "Traditional",
+      "copyright": "Unknown",
+      "year": "Unknown",
+      "source": "Self-upload"
+    }
   },
   {
     "id": "8",
     "title": "Har Har Shambhu",
-    "artist": "Traditional",
+    "artist": "Abhilipsa Panda & Jeetu Sharma",
     "duration": "3:46",
     "category": "bhajan",
     "language": "Hindi",
@@ -101,19 +171,39 @@
     "audioFile": "/audio/Har Har Shambhu.mp3",
     "thumbnail": "/thumbnails/bhajans/har-har-shambhu.jpg",
     "lrcFile": "/lyrics/har-har-shambhu.lrc",
-    "lyrics": "needs changes"
+    "lyrics": "हर हर शंभू शिव महादेवा",
+    "credits": {
+      "singers": ["Abhilipsa Panda", "Jeetu Sharma"],
+      "label": "Unknown",
+      "producer": "Unknown",
+      "lyricist": "Traditional",
+      "composer": "Jeetu Sharma",
+      "copyright": "Respective Owners",
+      "year": "2021",
+      "source": "YouTube"
+    }
   },
   {
     "id": "9",
     "title": "Raam Aayenge",
-    "artist": "Traditional",
+    "artist": "Vishal Mishra",
     "duration": "3:46",
     "category": "bhajan",
     "language": "Hindi",
-    "deity": "Shiv",
+    "deity": "Ram",
     "audioFile": "/audio/Raam Aayenge.mp3",
     "thumbnail": "/thumbnails/bhajans/Raam Aayenge.jpg",
     "lrcFile": "/lyrics/Raam Aayenge.lrc",
-    "lyrics": "needs changes"
+    "lyrics": "राम आएंगे तो अंगना सजाऊंगी",
+    "credits": {
+      "singers": ["Vishal Mishra"],
+      "label": "T-Series",
+      "producer": "Bhushan Kumar",
+      "lyricist": "Manoj Muntashir",
+      "composer": "Vishal Mishra",
+      "copyright": "T-Series",
+      "year": "2024",
+      "source": "YouTube"
+    }
   }
 ]

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Pause, SkipForward, SkipBack, X, Volume2, VolumeX } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
+import { FiCopy, FiDisc } from "react-icons/fi";
 
 export const MiniPlayer = () => {
   const { 
@@ -22,15 +23,18 @@ export const MiniPlayer = () => {
 
   if (!currentBhajan) return null;
 
+  const credits = currentBhajan.credits;
+  const thumbnailSrc = currentBhajan.thumbnail || `/thumbnails/bhajans/${currentBhajan.id}.jpg`;
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border shadow-elevated z-50 animate-slide-in-bottom">
       <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-3">
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Album Art - Hidden on mobile */}
-          <div className="hidden sm:block">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-md overflow-hidden shadow-soft flex-shrink-0 bg-muted">
+          {/* Album Art */}
+          <div className="flex-shrink-0">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-md overflow-hidden shadow-soft bg-muted">
               <img 
-                src={`/images/books/${currentBhajan.deity.toLowerCase()}.jpg`}
+                src={thumbnailSrc}
                 alt={currentBhajan.title}
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -40,7 +44,7 @@ export const MiniPlayer = () => {
             </div>
           </div>
 
-          {/* Bhajan Info */}
+          {/* Bhajan Info & Credits */}
           <div className="flex-1 min-w-0">
             <h4 className="font-semibold text-xs sm:text-sm text-foreground truncate">
               {currentBhajan.title}
@@ -48,6 +52,21 @@ export const MiniPlayer = () => {
             <p className="text-[10px] sm:text-xs text-muted-foreground truncate">
               {currentBhajan.artist} • {currentBhajan.deity}
             </p>
+            {/* Compact Credits - Desktop Only */}
+            <div className="hidden md:flex items-center gap-3 mt-0.5 text-[10px] text-muted-foreground/70">
+              {credits?.label && credits.label !== "Unknown" && (
+                <span className="flex items-center gap-1">
+                  <FiDisc className="h-2.5 w-2.5" />
+                  {credits.label}
+                </span>
+              )}
+              {credits?.copyright && (
+                <span className="flex items-center gap-1">
+                  <FiCopy className="h-2.5 w-2.5" />
+                  © {credits.copyright}
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Controls - Desktop & Tablet */}

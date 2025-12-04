@@ -1,6 +1,17 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import bhajansData from "@/data/bhajans.json";
 
+interface BhajanCredits {
+  singers?: string[];
+  label?: string;
+  producer?: string;
+  lyricist?: string;
+  composer?: string;
+  copyright?: string;
+  year?: string;
+  source?: string;
+}
+
 interface Bhajan {
   id: string;
   title: string;
@@ -13,6 +24,7 @@ interface Bhajan {
   thumbnail?: string;
   lrcFile?: string;
   lyrics: string;
+  credits?: BhajanCredits;
 }
 
 interface AudioContextType {
