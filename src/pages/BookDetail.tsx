@@ -155,7 +155,7 @@ const BookDetail = () => {
             <div className="max-w-5xl mx-auto">
               <PDFReader
                 pdfUrl={`/pdfs/${book.id}.pdf`}
-                darkMode={darkMode}
+                bookTitle={book.title}
               />
             </div>
           </TabsContent>

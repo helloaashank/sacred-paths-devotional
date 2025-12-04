@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FiMusic, FiPlay, FiPause } from "react-icons/fi";
+import { FiMusic, FiPlay, FiPause, FiDownload } from "react-icons/fi";
 import bhajansData from "@/data/bhajans.json";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { SyncedLyrics } from "@/components/SyncedLyrics";
+import { BhajanCredits } from "@/components/BhajanCredits";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAudio } from "@/contexts/AudioContext";
 
@@ -168,6 +169,45 @@ const Bhajans = () => {
                 {/* Expanded Player Section */}
                 {currentBhajan?.id === bhajan.id && (
                   <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-border animate-fade-in">
+                    {/* Large Thumbnail & Info */}
+                    <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-6">
+                      <div className="w-full md:w-48 lg:w-56 flex-shrink-0">
+                        <div className="aspect-square rounded-xl overflow-hidden shadow-elevated">
+                          <img 
+                            src={getThumbnail(bhajan)} 
+                            alt={bhajan.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex-1 space-y-4">
+                        <div>
+                          <h3 className="text-xl sm:text-2xl font-bold text-foreground">{bhajan.title}</h3>
+                          <p className="text-base sm:text-lg text-muted-foreground">{bhajan.artist}</p>
+                        </div>
+                        
+                        {/* Credits Section */}
+                        {(bhajan as any).credits && (
+                          <BhajanCredits 
+                            credits={(bhajan as any).credits} 
+                            title="Credits & Information"
+                          />
+                        )}
+                        
+                        {/* Download Button */}
+                        <a 
+                          href={bhajan.audioFile} 
+                          download={`${bhajan.title}.mp3`}
+                          className="inline-flex"
+                        >
+                          <Button variant="outline" size="sm" className="gap-2">
+                            <FiDownload className="h-4 w-4" />
+                            Download Audio
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+
                     {/* Synced Lyrics */}
                     <div className="mb-4 sm:mb-6">
                       <h4 className="font-semibold text-sm sm:text-base text-foreground mb-3">{t.bhajans.lyrics}:</h4>
