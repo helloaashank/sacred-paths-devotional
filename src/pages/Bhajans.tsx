@@ -71,7 +71,7 @@ const Bhajans = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 sm:py-12 px-3 sm:px-4">
+    <div className="min-h-screen py-6 sm:py-12 px-2 sm:px-4">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8 sm:mb-12 text-center">
@@ -190,7 +190,6 @@ const Bhajans = () => {
                         {(bhajan as any).credits && (
                           <BhajanCredits 
                             credits={(bhajan as any).credits} 
-                            title="Credits & Information"
                           />
                         )}
                         
