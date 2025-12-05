@@ -17,6 +17,8 @@ import Cart from "./pages/Cart";
 import Bhajans from "./pages/Bhajans";
 import Panchang from "./pages/Panchang";
 import Vidhis from "./pages/Vidhis";
+import Videos from "./pages/Videos";
+import YoutubePlayerScreen from "./pages/YoutubePlayerScreen";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -63,6 +65,8 @@ const App = () => {
                       <Route path="/bhajans" element={<Bhajans />} />
                       <Route path="/panchang" element={<Panchang />} />
                       <Route path="/vidhis" element={<Vidhis />} />
+                      <Route path="/videos" element={<Videos />} />
+                      <Route path="/videos/:videoId" element={<YoutubePlayerScreen />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </main>
