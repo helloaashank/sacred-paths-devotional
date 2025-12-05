@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { FiBook, FiMusic, FiCalendar, FiSun, FiMoon, FiMenu, FiShoppingCart } from "react-icons/fi";
+import { FiBook, FiMusic, FiCalendar, FiSun, FiMoon, FiMenu, FiShoppingCart, FiYoutube } from "react-icons/fi";
 import { GiMeditation } from "react-icons/gi";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
@@ -57,6 +57,10 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
             <Link to="/vidhis" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
               <GiMeditation className="text-lg" />
               <span>{t.nav.vidhis}</span>
+            </Link>
+            <Link to="/videos" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+              <FiYoutube className="text-red-500" />
+              <span>{t.nav.videos}</span>
             </Link>
           </div>
 
@@ -148,6 +152,14 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
               >
                 <GiMeditation className="text-lg" />
                 <span>{t.nav.vidhis}</span>
+              </Link>
+              <Link
+                to="/videos"
+                className="flex items-center gap-2 px-4 py-2 text-foreground hover:bg-muted rounded-lg transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <FiYoutube className="text-red-500" />
+                <span>{t.nav.videos}</span>
               </Link>
             </div>
           </div>
