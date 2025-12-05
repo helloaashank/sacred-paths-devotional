@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-12 sm:py-16 md:py-20 px-4 overflow-hidden">
+      <section className="relative py-8 sm:py-16 md:py-20 px-2 sm:px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-hero opacity-10" />
         <div className="container mx-auto relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
@@ -42,7 +42,7 @@ const Home = () => {
       </section>
 
       {/* Featured Books */}
-      <section className="py-12 sm:py-16 px-4 bg-muted/30">
+      <section className="py-8 sm:py-16 px-2 sm:px-4 bg-muted/30">
         <div className="container mx-auto">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
             <div>
@@ -101,7 +101,7 @@ const Home = () => {
       </section>
 
       {/* Featured Bhajans */}
-      <section className="py-12 sm:py-16 px-4">
+      <section className="py-8 sm:py-16 px-2 sm:px-4">
         <div className="container mx-auto">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
             <div>
@@ -151,7 +151,7 @@ const Home = () => {
       </section>
 
       {/* Quick Links */}
-      <section className="py-12 sm:py-16 px-4 bg-muted/30">
+      <section className="py-8 sm:py-16 px-2 sm:px-4 bg-muted/30">
         <div className="container mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground mb-8 sm:mb-12">Explore More</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">

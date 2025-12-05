@@ -14,7 +14,7 @@ const Vidhis = () => {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4">
+    <div className="min-h-screen py-6 sm:py-12 px-2 sm:px-4">
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
         <div className="mb-12 text-center">
