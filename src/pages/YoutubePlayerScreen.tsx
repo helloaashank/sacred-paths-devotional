@@ -75,17 +75,6 @@ const YoutubePlayerScreen = () => {
                   </p>
                 )}
               </div>
-              <a
-                href={getWatchUrl(videoId)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex"
-              >
-                <Button variant="outline" size="sm">
-                  <FiExternalLink className="mr-2 h-4 w-4" />
-                  Watch on YouTube
-                </Button>
-              </a>
             </div>
           </div>
         </div>
