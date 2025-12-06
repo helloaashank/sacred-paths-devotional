@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { FiBook, FiMusic, FiCalendar, FiSun, FiMoon, FiMenu, FiShoppingCart, FiYoutube } from "react-icons/fi";
+import { FiBook, FiMusic, FiCalendar, FiSun, FiMoon, FiMenu, FiShoppingCart, FiYoutube, FiSearch } from "react-icons/fi";
 import { GiMeditation } from "react-icons/gi";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import SearchBar from "@/components/SearchBar";
 
 interface NavbarProps {
   darkMode: boolean;
@@ -41,7 +42,8 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-4">
+            <SearchBar className="w-64 lg:w-80" />
             <Link to="/books" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
               <FiBook />
               <span>{t.nav.books}</span>

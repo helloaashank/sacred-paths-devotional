@@ -84,5 +84,18 @@
     "error": "Something went wrong",
     "back": "Back",
     "home": "Home"
+  },
+  "search": {
+    "placeholder": "Search books, bhajans, videos...",
+    "recent": "Recent Searches",
+    "no_results": "No results found",
+    "try_different": "Try different keywords",
+    "results_for": "Results for",
+    "found": "found",
+    "no_results_found": "No results found",
+    "no_results_description": "Try adjusting your search terms or browse our categories",
+    "start_searching": "Start searching",
+    "search_description": "Find books, bhajans, videos and more",
+    "see_all": "See all results"
   }
 }

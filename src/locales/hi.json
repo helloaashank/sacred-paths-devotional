@@ -84,5 +84,18 @@
     "error": "कुछ गलत हो गया",
     "back": "वापस",
     "home": "होम"
+  },
+  "search": {
+    "placeholder": "पुस्तकें, भजन, वीडियो खोजें...",
+    "recent": "हाल की खोज",
+    "no_results": "कोई परिणाम नहीं मिला",
+    "try_different": "अलग कीवर्ड आज़माएं",
+    "results_for": "परिणाम",
+    "found": "मिले",
+    "no_results_found": "कोई परिणाम नहीं मिला",
+    "no_results_description": "अपने खोज शब्दों को समायोजित करें",
+    "start_searching": "खोजना शुरू करें",
+    "search_description": "पुस्तकें, भजन, वीडियो और अधिक खोजें",
+    "see_all": "सभी परिणाम देखें"
   }
 }

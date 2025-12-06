@@ -84,5 +84,18 @@
     "error": "Kuch Galat Ho Gaya",
     "back": "Back",
     "home": "Home"
+  },
+  "search": {
+    "placeholder": "Books, bhajans, videos search karo...",
+    "recent": "Recent Searches",
+    "no_results": "Koi result nahi mila",
+    "try_different": "Alag keywords try karo",
+    "results_for": "Results for",
+    "found": "mile",
+    "no_results_found": "Koi result nahi mila",
+    "no_results_description": "Search words adjust karo",
+    "start_searching": "Search karna shuru karo",
+    "search_description": "Books, bhajans, videos khojo",
+    "see_all": "Sab results dekho"
   }
 }
