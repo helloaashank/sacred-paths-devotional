@@ -221,7 +221,7 @@ const Search: React.FC = () => {
                                 <div className="flex flex-wrap gap-2 mt-2">
                                   {Object.entries(result.metadata).slice(0, 2).map(([key, value]) => (
                                     value && (
-                                      <span key={key} className="text-xs px-2 py-0.5 bg-secondary rounded-full text-muted-foreground">
+                                      <span key={key} className="text-xs px-2 py-0.5 bg-primary/15 rounded-full text-primary border border-primary/20">
                                         {value}
                                       </span>
                                     )

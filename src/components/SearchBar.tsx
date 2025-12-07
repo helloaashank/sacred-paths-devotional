@@ -129,7 +129,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ expanded = false, onClose, classN
     <div ref={containerRef} className={`relative ${className}`}>
       <form onSubmit={handleSubmit} className="relative">
         <div className="relative flex items-center">
-          <FiSearch className="absolute left-3 h-4 w-4 text-muted-foreground" />
+          <FiSearch className="absolute left-3 h-4 w-4 text-[hsl(0,0%,99%)]" />
           <input
             ref={inputRef}
             type="text"
@@ -137,8 +137,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ expanded = false, onClose, classN
             onChange={handleInputChange}
             onFocus={() => setIsOpen(true)}
             placeholder={t.search?.placeholder || 'Search books, bhajans, videos...'}
-            className="w-full h-10 pl-10 pr-10 rounded-full bg-secondary/50 border border-border/50 
-                       text-foreground placeholder:text-muted-foreground
+            className="w-full h-10 pl-10 pr-10 rounded-full bg-[hsl(0,0%,0%)] border border-border/50 
+                       text-[hsl(0,0%,99%)] placeholder:text-[hsl(0,0%,70%)]
                        focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary
                        transition-all duration-200"
           />
