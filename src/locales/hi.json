@@ -80,9 +80,8 @@
     "remove": "हटाएं",
     "quantity": "मात्रा",
     "pay_via_upi": "UPI से भुगतान करें",
-    "amount": "राशि",
-    "pay_with_phonepe": "PhonePe से भुगतान करें",
-    "scan_qr_note": "PhonePe/UPI से भुगतान के लिए QR कोड स्कैन करें या बटन पर क्लिक करें"
+    "amount": "भुगतान राशि",
+    "scan_qr_note": "किसी भी UPI ऐप से भुगतान के लिए QR स्कैन करें या बटन दबाएं"
   },
   "common": {
     "loading": "लोड हो रहा है...",

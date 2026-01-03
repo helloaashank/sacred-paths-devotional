@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
 import Cart from "./pages/Cart";
+import Payment from "./pages/Payment";
 import Bhajans from "./pages/Bhajans";
 import Panchang from "./pages/Panchang";
 import Vidhis from "./pages/Vidhis";
@@ -63,6 +64,7 @@ const App = () => {
                       <Route path="/books" element={<Books />} />
                       <Route path="/books/:id" element={<BookDetail />} />
                       <Route path="/cart" element={<Cart />} />
+                      <Route path="/payment" element={<Payment />} />
                       <Route path="/bhajans" element={<Bhajans />} />
                       <Route path="/panchang" element={<Panchang />} />
                       <Route path="/vidhis" element={<Vidhis />} />
