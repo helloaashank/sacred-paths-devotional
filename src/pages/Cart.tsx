@@ -1,9 +1,72 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { FiTrash2, FiShoppingBag } from "react-icons/fi";
+import { FiTrash2, FiShoppingBag, FiExternalLink } from "react-icons/fi";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import qrCodeImage from "@/assets/qr-code.png";
+
+const UPI_ID = "8802257971@ybl";
+const PHONEPE_LINK = `upi://pay?pa=${UPI_ID}&pn=Manish%20Kumar&cu=INR`;
+
+const PaymentSection = ({ total }: { total: number }) => {
+  const { t } = useLanguage();
+  
+  return (
+    <Card className="bg-gradient-card mt-6">
+      <CardContent className="p-6">
+        <h3 className="text-xl font-bold text-foreground mb-4 text-center">
+          {t.cart?.pay_via_upi || "Pay via UPI"}
+        </h3>
+        
+        <div className="flex flex-col items-center gap-4">
+          {/* QR Code */}
+          <div className="bg-white p-3 rounded-lg shadow-md">
+            <img 
+              src={qrCodeImage} 
+              alt="UPI QR Code" 
+              className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
+            />
+          </div>
+          
+          {/* UPI ID */}
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground mb-1">UPI ID</p>
+            <p className="font-mono text-foreground font-semibold bg-muted px-3 py-1 rounded">
+              {UPI_ID}
+            </p>
+          </div>
+          
+          {/* Amount */}
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground mb-1">{t.cart?.amount || "Amount"}</p>
+            <p className="text-2xl font-bold text-primary">₹{total}</p>
+          </div>
+          
+          {/* PhonePe Link */}
+          <a 
+            href={`${PHONEPE_LINK}&am=${total}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full"
+          >
+            <Button 
+              size="lg" 
+              className="w-full bg-[#5f259f] hover:bg-[#4a1d7a] text-white"
+            >
+              <FiExternalLink className="mr-2 h-4 w-4" />
+              {t.cart?.pay_with_phonepe || "Pay with PhonePe"}
+            </Button>
+          </a>
+          
+          <p className="text-xs text-muted-foreground text-center">
+            {t.cart?.scan_qr_note || "Scan QR code or click button to pay via PhonePe/UPI"}
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, total } = useCart();
@@ -101,11 +164,11 @@ const Cart = () => {
                 <span className="text-primary">₹{total}</span>
               </div>
             </div>
-            <Button size="lg" className="w-full bg-gradient-hero shadow-soft">
-              {t.cart.checkout}
-            </Button>
           </CardContent>
         </Card>
+
+        {/* Payment Section with QR Code */}
+        <PaymentSection total={total} />
       </div>
     </div>
   );
