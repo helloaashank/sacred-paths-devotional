@@ -2,12 +2,16 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FiBook, FiShoppingCart, FiArrowLeft, FiFileText } from "react-icons/fi";
+import { FiBook, FiShoppingCart, FiArrowLeft, FiFileText, FiExternalLink } from "react-icons/fi";
 import booksData from "@/data/books.json";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PDFReader } from "@/components/PDFReader";
 import { useState, useEffect } from "react";
+import qrCodeImage from "@/assets/qr-code.png";
+
+const UPI_ID = "8802257971@ybl";
+const PHONEPE_LINK = `upi://pay?pa=${UPI_ID}&pn=Manish%20Kumar&cu=INR`;
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -146,6 +150,47 @@ const BookDetail = () => {
                     <span className="sm:hidden">Add to Cart</span>
                   </Button>
                 </div>
+
+                {/* Buy Now - UPI Payment Section */}
+                <Card className="bg-muted/30 border-primary/20">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-bold text-foreground mb-3 text-center">
+                      {t.books?.buy_now || "Buy Now via UPI"}
+                    </h3>
+                    
+                    <div className="flex flex-col items-center gap-3">
+                      {/* QR Code */}
+                      <div className="bg-white p-2 rounded-lg shadow-sm">
+                        <img 
+                          src={qrCodeImage} 
+                          alt="UPI QR Code" 
+                          className="w-32 h-32 object-contain"
+                        />
+                      </div>
+                      
+                      {/* UPI ID */}
+                      <p className="font-mono text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+                        {UPI_ID}
+                      </p>
+                      
+                      {/* PhonePe Link */}
+                      <a 
+                        href={`${PHONEPE_LINK}&am=${book.price}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full"
+                      >
+                        <Button 
+                          size="sm" 
+                          className="w-full bg-[#5f259f] hover:bg-[#4a1d7a] text-white"
+                        >
+                          <FiExternalLink className="mr-2 h-3 w-3" />
+                          Pay ₹{book.price} with PhonePe
+                        </Button>
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </TabsContent>
