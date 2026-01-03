@@ -80,9 +80,8 @@
     "remove": "Remove",
     "quantity": "Quantity",
     "pay_via_upi": "Pay via UPI",
-    "amount": "Amount",
-    "pay_with_phonepe": "Pay with PhonePe",
-    "scan_qr_note": "Scan QR code or click button to pay via PhonePe/UPI"
+    "amount": "Amount to Pay",
+    "scan_qr_note": "Scan QR code or tap button to pay with any UPI app"
   },
   "common": {
     "loading": "Loading...",

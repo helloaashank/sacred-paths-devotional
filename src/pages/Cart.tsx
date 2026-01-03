@@ -1,76 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { FiTrash2, FiShoppingBag, FiExternalLink } from "react-icons/fi";
+import { FiTrash2, FiShoppingBag, FiPercent, FiCreditCard } from "react-icons/fi";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import qrCodeImage from "@/assets/qr-code.png";
-
-const UPI_ID = "8802257971@ybl";
-const PHONEPE_LINK = `upi://pay?pa=${UPI_ID}&pn=Manish%20Kumar&cu=INR`;
-
-const PaymentSection = ({ total }: { total: number }) => {
-  const { t } = useLanguage();
-  
-  return (
-    <Card className="bg-gradient-card mt-6">
-      <CardContent className="p-6">
-        <h3 className="text-xl font-bold text-foreground mb-4 text-center">
-          {t.cart?.pay_via_upi || "Pay via UPI"}
-        </h3>
-        
-        <div className="flex flex-col items-center gap-4">
-          {/* QR Code */}
-          <div className="bg-white p-3 rounded-lg shadow-md">
-            <img 
-              src={qrCodeImage} 
-              alt="UPI QR Code" 
-              className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
-            />
-          </div>
-          
-          {/* UPI ID */}
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-1">UPI ID</p>
-            <p className="font-mono text-foreground font-semibold bg-muted px-3 py-1 rounded">
-              {UPI_ID}
-            </p>
-          </div>
-          
-          {/* Amount */}
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-1">{t.cart?.amount || "Amount"}</p>
-            <p className="text-2xl font-bold text-primary">₹{total}</p>
-          </div>
-          
-          {/* PhonePe Link */}
-          <a 
-            href={`${PHONEPE_LINK}&am=${total}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full"
-          >
-            <Button 
-              size="lg" 
-              className="w-full bg-[#5f259f] hover:bg-[#4a1d7a] text-white"
-            >
-              <FiExternalLink className="mr-2 h-4 w-4" />
-              {t.cart?.pay_with_phonepe || "Pay with PhonePe"}
-            </Button>
-          </a>
-          
-          <p className="text-xs text-muted-foreground text-center">
-            {t.cart?.scan_qr_note || "Scan QR code or click button to pay via PhonePe/UPI"}
-          </p>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, total } = useCart();
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  // Calculate savings (assuming 20% discount from MRP)
+  const mrpTotal = Math.round(total * 1.25);
+  const savings = mrpTotal - total;
+
+  const handleProceedToPayment = () => {
+    navigate("/payment", {
+      state: {
+        amount: total,
+        items: items.map(item => ({
+          title: item.title,
+          quantity: item.quantity,
+          price: item.price
+        })),
+        type: "cart"
+      }
+    });
+  };
 
   if (items.length === 0) {
     return (
@@ -152,23 +108,54 @@ const Cart = () => {
           ))}
         </div>
 
+        {/* Order Summary Card */}
         <Card className="bg-gradient-card">
           <CardContent className="p-6">
+            {/* Savings Banner */}
+            <div className="flex items-center gap-3 bg-green-500/10 border border-green-500/20 rounded-lg p-3 mb-4">
+              <FiPercent className="h-5 w-5 text-green-600 dark:text-green-400" />
+              <div>
+                <p className="text-green-700 dark:text-green-300 font-semibold">
+                  You're saving ₹{savings}!
+                </p>
+                <p className="text-xs text-green-600 dark:text-green-400">
+                  20% off on this order
+                </p>
+              </div>
+            </div>
+
             <div className="space-y-2 mb-4">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">MRP Total:</span>
+                <span className="text-muted-foreground line-through">₹{mrpTotal}</span>
+              </div>
+              <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
+                <span>Discount:</span>
+                <span>- ₹{savings}</span>
+              </div>
               <div className="flex justify-between text-lg">
                 <span className="text-muted-foreground">{t.cart.subtotal}:</span>
                 <span className="font-semibold text-foreground">₹{total}</span>
               </div>
-              <div className="flex justify-between text-2xl font-bold">
-                <span className="text-foreground">{t.cart.total}:</span>
-                <span className="text-primary">₹{total}</span>
+              <div className="border-t border-border pt-2">
+                <div className="flex justify-between text-2xl font-bold">
+                  <span className="text-foreground">{t.cart.total}:</span>
+                  <span className="text-primary">₹{total}</span>
+                </div>
               </div>
             </div>
+
+            {/* Proceed to Payment Button */}
+            <Button 
+              size="lg" 
+              className="w-full bg-gradient-hero shadow-soft mt-4"
+              onClick={handleProceedToPayment}
+            >
+              <FiCreditCard className="mr-2 h-5 w-5" />
+              {t.cart?.checkout || "Proceed to Payment"}
+            </Button>
           </CardContent>
         </Card>
-
-        {/* Payment Section with QR Code */}
-        <PaymentSection total={total} />
       </div>
     </div>
   );

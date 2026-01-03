@@ -80,9 +80,8 @@
     "remove": "Hataein",
     "quantity": "Quantity",
     "pay_via_upi": "UPI Se Pay Karo",
-    "amount": "Amount",
-    "pay_with_phonepe": "PhonePe Se Pay Karo",
-    "scan_qr_note": "PhonePe/UPI se pay karne ke liye QR code scan karo ya button click karo"
+    "amount": "Pay Karne Ki Amount",
+    "scan_qr_note": "Kisi bhi UPI app se pay karne ke liye QR scan karo ya button tap karo"
   },
   "common": {
     "loading": "Load Ho Raha Hai...",
