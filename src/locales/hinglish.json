@@ -83,6 +83,12 @@
     "amount": "Pay Karne Ki Amount",
     "scan_qr_note": "Kisi bhi UPI app se pay karne ke liye QR scan karo ya button tap karo"
   },
+  "orders": {
+    "title": "Mere Orders",
+    "no_orders": "Abhi koi order nahi",
+    "start_shopping": "Orders dekhne ke liye shopping shuru karo",
+    "completed": "Complete"
+  },
   "common": {
     "loading": "Load Ho Raha Hai...",
     "error": "Kuch Galat Ho Gaya",

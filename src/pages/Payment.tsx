@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FiArrowLeft, FiExternalLink, FiCheckCircle } from "react-icons/fi";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useCart } from "@/contexts/CartContext";
+import { useOrders } from "@/contexts/OrdersContext";
 import qrCodeImage from "@/assets/qr-code.png";
 
 const UPI_ID = "8802257971@ybl";
@@ -13,6 +14,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { clearCart } = useCart();
+  const { addOrder } = useOrders();
   
   // Get amount and items from navigation state
   const { amount, items, type } = location.state || { amount: 0, items: [], type: "cart" };
@@ -141,10 +143,11 @@ const Payment = () => {
                 variant="outline"
                 className="w-full"
                 onClick={() => {
+                  addOrder(items, amount);
                   if (type === "cart") {
                     clearCart();
                   }
-                  navigate("/books");
+                  navigate("/orders");
                 }}
               >
                 <FiCheckCircle className="mr-2 h-4 w-4" />

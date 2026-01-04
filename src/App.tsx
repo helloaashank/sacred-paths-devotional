@@ -9,12 +9,14 @@ import { Footer } from "./components/Footer";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { CartProvider } from "./contexts/CartContext";
 import { AudioProvider } from "./contexts/AudioContext";
+import { OrdersProvider } from "./contexts/OrdersContext";
 import { MiniPlayer } from "./components/MiniPlayer";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
+import Orders from "./pages/Orders";
 import Bhajans from "./pages/Bhajans";
 import Panchang from "./pages/Panchang";
 import Vidhis from "./pages/Vidhis";
@@ -52,7 +54,8 @@ const App = () => {
       <TooltipProvider>
         <LanguageProvider>
           <CartProvider>
-            <AudioProvider>
+            <OrdersProvider>
+              <AudioProvider>
               <Toaster />
               <Sonner />
               <BrowserRouter>
@@ -65,6 +68,7 @@ const App = () => {
                       <Route path="/books/:id" element={<BookDetail />} />
                       <Route path="/cart" element={<Cart />} />
                       <Route path="/payment" element={<Payment />} />
+                      <Route path="/orders" element={<Orders />} />
                       <Route path="/bhajans" element={<Bhajans />} />
                       <Route path="/panchang" element={<Panchang />} />
                       <Route path="/vidhis" element={<Vidhis />} />
@@ -78,7 +82,8 @@ const App = () => {
                   <MiniPlayer />
                 </div>
               </BrowserRouter>
-            </AudioProvider>
+              </AudioProvider>
+            </OrdersProvider>
           </CartProvider>
         </LanguageProvider>
       </TooltipProvider>
