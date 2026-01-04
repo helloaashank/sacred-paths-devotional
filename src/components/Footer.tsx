@@ -17,7 +17,7 @@ export const Footer = () => {
               Your gateway to spiritual wisdom, devotional music, and ancient traditions.
             </p>
             <div className="flex gap-2 sm:gap-3">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/share/p/16sNQ8DgeZ/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <FiFacebook className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -55,18 +55,18 @@ export const Footer = () => {
           </div>
 
           {/* Newsletter */}
-          <div className="lg:col-span-1 sm:col-span-2">
+          <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base text-foreground">Stay Connected</h3>
             <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
               Subscribe to receive spiritual insights and updates.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex gap-2 max-w-sm">
               <input
                 type="email"
                 placeholder="Your email"
                 className="flex-1 min-w-0 px-3 py-2 text-xs sm:text-sm bg-background border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
-              <button className="px-4 py-2 text-xs sm:text-sm font-medium bg-gradient-hero text-primary-foreground rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">
+              <button className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium bg-gradient-hero text-primary-foreground rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap shrink-0">
                 Subscribe
               </button>
             </div>
