@@ -12,5 +12,47 @@
     "title": "Kishori Kuch Aisa Intjam Ho Jaye",
     "channelName": "Bhajan Channel",
     "description": "Beautiful Krishna bhajan"
+  },
+  {
+    "id": "3",
+    "url": "https://www.youtube.com/watch?v=AETFvQonfV8",
+    "title": "Achyutam Keshavam",
+    "channelName": "Art of Living",
+    "description": "Peaceful Krishna bhajan"
+  },
+  {
+    "id": "4",
+    "url": "https://www.youtube.com/watch?v=PL8N7e7i9Tg",
+    "title": "Shiv Tandav Stotram",
+    "channelName": "T-Series Bhakti Sagar",
+    "description": "Powerful Shiva stotram"
+  },
+  {
+    "id": "5",
+    "url": "https://www.youtube.com/watch?v=KzvR0Zl2Y2k",
+    "title": "Ram Siya Ram",
+    "channelName": "Sachet Tandon",
+    "description": "Devotional Ram bhajan"
+  },
+  {
+    "id": "6",
+    "url": "https://www.youtube.com/watch?v=F5zVQ4nYp9I",
+    "title": "Shree Krishna Govind Hare Murari",
+    "channelName": "Soulful Bhajans",
+    "description": "Melodious Krishna bhajan"
+  },
+  {
+    "id": "7",
+    "url": "https://www.youtube.com/watch?v=2fO1lQ8E5dY",
+    "title": "Gayatri Mantra",
+    "channelName": "Spiritual Mantras",
+    "description": "Vedic Gayatri Mantra chanting"
+  },
+  {
+    "id": "8",
+    "url": "https://www.youtube.com/watch?v=YxWlaYCA8MU",
+    "title": "Om Namah Shivaya",
+    "channelName": "Isha Foundation",
+    "description": "Meditative Shiva mantra"
   }
 ]
