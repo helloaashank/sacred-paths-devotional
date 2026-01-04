@@ -5,9 +5,10 @@ import { FiArrowLeft, FiExternalLink, FiCheckCircle } from "react-icons/fi";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useCart } from "@/contexts/CartContext";
 import { useOrders } from "@/contexts/OrdersContext";
-import qrCodeImage from "@/assets/qr-code.png";
+import { QRCodeSVG } from "qrcode.react";
 
-const UPI_ID = "8802257971@ybl";
+const UPI_ID = "8802257971@ibl";
+const UPI_NAME = "MANISH KUMAR VERMA";
 
 const Payment = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const Payment = () => {
   const { amount, items, type } = location.state || { amount: 0, items: [], type: "cart" };
   
   // Generate universal UPI link with pre-filled amount
-  const upiLink = `upi://pay?pa=${UPI_ID}&pn=Manish%20Kumar&cu=INR&am=${amount}`;
+  const upiLink = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(UPI_NAME)}&mc=0000&mode=02&purpose=00&am=${amount}&cu=INR`;
 
   if (!amount || amount <= 0) {
     return (
@@ -97,13 +98,14 @@ const Payment = () => {
               </div>
             )}
 
-            {/* QR Code */}
+            {/* Dynamic QR Code */}
             <div className="flex justify-center mb-6">
               <div className="bg-white p-4 rounded-xl shadow-lg">
-                <img 
-                  src={qrCodeImage} 
-                  alt="UPI QR Code" 
-                  className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
+                <QRCodeSVG 
+                  value={upiLink}
+                  size={224}
+                  level="H"
+                  includeMargin={false}
                 />
               </div>
             </div>
