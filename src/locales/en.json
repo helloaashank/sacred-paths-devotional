@@ -83,6 +83,12 @@
     "amount": "Amount to Pay",
     "scan_qr_note": "Scan QR code or tap button to pay with any UPI app"
   },
+  "orders": {
+    "title": "My Orders",
+    "no_orders": "No orders yet",
+    "start_shopping": "Start shopping to see your orders here",
+    "completed": "Completed"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",
