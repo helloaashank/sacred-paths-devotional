@@ -1,27 +1,66 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FiCalendar, FiSun, FiMoon, FiMapPin } from "react-icons/fi";
+import { FiCalendar, FiSun, FiMoon, FiMapPin, FiBell, FiBellOff } from "react-icons/fi";
 import panchangData from "@/data/panchang.json";
 import { format } from "date-fns";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { usePanchangReminders } from "@/hooks/usePanchangReminders";
+import { toast } from "sonner";
 
 const Panchang = () => {
   const [selectedCity, setSelectedCity] = useState("delhi");
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [remindersEnabled, setRemindersEnabled] = useState(false);
+  const [scheduledCount, setScheduledCount] = useState(0);
   const { t } = useLanguage();
+  
+  const {
+    isNative,
+    getRemindersEnabled,
+    scheduleAllReminders,
+    cancelAllReminders,
+    getScheduledCount,
+  } = usePanchangReminders();
+
+  // Load reminder state on mount
+  useEffect(() => {
+    setRemindersEnabled(getRemindersEnabled());
+    if (isNative) {
+      getScheduledCount().then(setScheduledCount);
+    }
+  }, []);
 
   // Auto-update to current device date/time
   useEffect(() => {
     const timer = setInterval(() => {
       setSelectedDate(new Date());
-    }, 60000); // Update every minute
-
+    }, 60000);
     return () => clearInterval(timer);
   }, []);
+
+  const handleToggleReminders = async () => {
+    if (remindersEnabled) {
+      await cancelAllReminders();
+      setRemindersEnabled(false);
+      setScheduledCount(0);
+      toast.success("Festival reminders disabled");
+    } else {
+      const count = await scheduleAllReminders(selectedCity);
+      if (count > 0) {
+        setRemindersEnabled(true);
+        setScheduledCount(count);
+        toast.success(`${count} festival reminders scheduled`);
+      } else if (!isNative) {
+        toast.info("Reminders work on Android app only");
+      } else {
+        toast.error("Failed to schedule reminders");
+      }
+    }
+  };
 
   const cityData = panchangData.cities.find((city) => city.id === selectedCity);
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
@@ -36,9 +75,31 @@ const Panchang = () => {
             <FiCalendar className="text-primary" />
             {t.panchang.title}
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
             {t.panchang.subtitle}
           </p>
+          
+          {/* Reminder Toggle Button */}
+          <Button
+            variant={remindersEnabled ? "default" : "outline"}
+            onClick={handleToggleReminders}
+            className={cn(
+              "gap-2",
+              remindersEnabled && "bg-gradient-hero"
+            )}
+          >
+            {remindersEnabled ? (
+              <>
+                <FiBell className="animate-pulse" />
+                Reminders On ({scheduledCount})
+              </>
+            ) : (
+              <>
+                <FiBellOff />
+                Enable Festival Reminders
+              </>
+            )}
+          </Button>
         </div>
 
         {/* Date and City Selector */}
