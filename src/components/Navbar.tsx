@@ -1,17 +1,20 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { FiBook, FiMusic, FiCalendar, FiSun, FiMoon, FiMenu, FiShoppingCart, FiYoutube, FiSearch } from "react-icons/fi";
+import { FiBook, FiMusic, FiCalendar, FiSun, FiMoon, FiMenu, FiShoppingCart, FiYoutube, FiUser, FiLogOut } from "react-icons/fi";
 import { GiMeditation } from "react-icons/gi";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SearchBar from "@/components/SearchBar";
 
 interface NavbarProps {
@@ -23,6 +26,12 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { itemCount } = useCart();
   const { language, setLanguage, t } = useLanguage();
+  const { user, profile, signOut } = useAuth();
+
+  const getInitials = (name: string | null) => {
+    if (!name) return "?";
+    return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
+  };
 
   const languageLabels = {
     en: "English",
@@ -108,6 +117,48 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
               {darkMode ? <FiSun className="h-4 w-4 sm:h-5 sm:w-5" /> : <FiMoon className="h-4 w-4 sm:h-5 sm:w-5" />}
             </Button>
 
+            {/* User Menu / Auth */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full h-8 w-8 sm:h-9 sm:w-9 p-0">
+                    <Avatar className="h-8 w-8 sm:h-9 sm:w-9">
+                      <AvatarImage src={profile?.avatar_url || undefined} />
+                      <AvatarFallback className="text-xs bg-gradient-hero text-primary-foreground">
+                        {getInitials(profile?.display_name || user.email)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 bg-card border-border z-50">
+                  <div className="px-2 py-1.5">
+                    <p className="text-sm font-medium text-foreground truncate">
+                      {profile?.display_name || "User"}
+                    </p>
+                    <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile" className="flex items-center gap-2 cursor-pointer">
+                      <FiUser className="h-4 w-4" />
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => signOut()} className="flex items-center gap-2 text-destructive cursor-pointer">
+                    <FiLogOut className="h-4 w-4" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link to="/auth">
+                <Button size="sm" className="bg-gradient-hero text-xs sm:text-sm px-3 sm:px-4">
+                  Sign In
+                </Button>
+              </Link>
+            )}
+
             <Button
               variant="ghost"
               size="icon"
@@ -163,6 +214,19 @@ export const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
                 <FiYoutube className="text-red-500" />
                 <span>{t.nav.videos}</span>
               </Link>
+              {user && (
+                <>
+                  <div className="border-t border-border my-2" />
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 px-4 py-2 text-foreground hover:bg-muted rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <FiUser />
+                    <span>Profile</span>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
