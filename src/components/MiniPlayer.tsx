@@ -27,8 +27,8 @@ export const MiniPlayer = () => {
   const thumbnailSrc = currentBhajan.thumbnail || `/thumbnails/bhajans/${currentBhajan.id}.jpg`;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border shadow-elevated z-50 animate-slide-in-bottom">
-      <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-3">
+    <div className="fixed bottom-14 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border shadow-elevated z-40 animate-slide-in-bottom safe-area-bottom">
+      <div className="px-3 py-2">
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Album Art */}
           <div className="flex-shrink-0">

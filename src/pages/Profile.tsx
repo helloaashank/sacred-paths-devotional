@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { FiEdit2, FiMapPin, FiCalendar, FiGrid, FiHeart, FiSettings, FiUserPlus, FiUserCheck } from "react-icons/fi";
+import { FiEdit2, FiMapPin, FiCalendar, FiGrid, FiHeart, FiUserPlus, FiUserCheck } from "react-icons/fi";
 import { GiMeditation } from "react-icons/gi";
 
 interface ProfileData {
@@ -158,17 +158,12 @@ const Profile = () => {
 
   const getInitials = (name: string | null) => {
     if (!name) return "?";
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
+    return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center h-64">
         <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" />
       </div>
     );
@@ -176,195 +171,171 @@ const Profile = () => {
 
   if (!profileData) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4">
-        <GiMeditation className="text-6xl text-muted-foreground mb-4" />
-        <h2 className="text-xl font-semibold text-foreground mb-2">Profile not found</h2>
-        <p className="text-muted-foreground mb-4">This user doesn't exist or has been removed.</p>
+      <div className="flex flex-col items-center justify-center h-64 px-4">
+        <GiMeditation className="text-5xl text-muted-foreground mb-3" />
+        <h2 className="text-lg font-semibold text-foreground mb-1">Profile not found</h2>
+        <p className="text-sm text-muted-foreground mb-4">This user doesn't exist.</p>
         <Link to="/">
-          <Button>Go Home</Button>
+          <Button size="sm">Go Home</Button>
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pb-8">
-      {/* Profile Header */}
-      <div className="bg-gradient-hero h-32 sm:h-40" />
-      
-      <div className="container mx-auto px-4 -mt-16">
-        <Card className="shadow-elevated">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-              {/* Avatar */}
-              <div className="flex justify-center sm:justify-start">
-                <Avatar className="h-24 w-24 sm:h-32 sm:w-32 border-4 border-background shadow-lg">
-                  <AvatarImage src={profileData.avatar_url || undefined} />
-                  <AvatarFallback className="text-2xl bg-gradient-hero text-primary-foreground">
-                    {getInitials(profileData.display_name)}
-                  </AvatarFallback>
-                </Avatar>
+    <div className="pb-4">
+      {/* Profile Header - Compact */}
+      <div className="px-4 pt-4">
+        <div className="flex items-start gap-4 mb-4">
+          {/* Avatar */}
+          <Avatar className="h-20 w-20 border-2 border-primary/20">
+            <AvatarImage src={profileData.avatar_url || undefined} />
+            <AvatarFallback className="text-xl bg-gradient-hero text-primary-foreground">
+              {getInitials(profileData.display_name)}
+            </AvatarFallback>
+          </Avatar>
+
+          {/* Stats Row */}
+          <div className="flex-1 pt-2">
+            <div className="flex justify-around text-center">
+              <div>
+                <p className="font-bold text-lg text-foreground">{profileData.posts_count}</p>
+                <p className="text-[10px] text-muted-foreground uppercase">Posts</p>
               </div>
-
-              {/* Info */}
-              <div className="flex-1 text-center sm:text-left">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
-                  <h1 className="text-xl sm:text-2xl font-bold text-foreground">
-                    {profileData.display_name || "Anonymous"}
-                  </h1>
-                  {profileData.is_priest && profileData.priest_status === "approved" && (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
-                      <GiMeditation className="h-3 w-3" />
-                      Verified Priest
-                    </span>
-                  )}
-                </div>
-
-                {profileData.username && (
-                  <p className="text-sm text-muted-foreground mb-2">@{profileData.username}</p>
-                )}
-
-                {profileData.bio && (
-                  <p className="text-sm text-foreground mb-3">{profileData.bio}</p>
-                )}
-
-                <div className="flex flex-wrap justify-center sm:justify-start gap-4 text-sm text-muted-foreground mb-4">
-                  {profileData.location && (
-                    <span className="flex items-center gap-1">
-                      <FiMapPin className="h-4 w-4" />
-                      {profileData.location}
-                    </span>
-                  )}
-                  <span className="flex items-center gap-1">
-                    <FiCalendar className="h-4 w-4" />
-                    Joined {new Date(profileData.created_at).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
-                  </span>
-                </div>
-
-                {/* Stats */}
-                <div className="flex justify-center sm:justify-start gap-6 mb-4">
-                  <div className="text-center">
-                    <p className="font-bold text-foreground">{profileData.posts_count}</p>
-                    <p className="text-xs text-muted-foreground">Posts</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="font-bold text-foreground">{profileData.followers_count}</p>
-                    <p className="text-xs text-muted-foreground">Followers</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="font-bold text-foreground">{profileData.following_count}</p>
-                    <p className="text-xs text-muted-foreground">Following</p>
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex justify-center sm:justify-start gap-2">
-                  {isOwnProfile ? (
-                    <>
-                      <Link to="/profile/edit">
-                        <Button variant="outline" size="sm">
-                          <FiEdit2 className="mr-2 h-4 w-4" />
-                          Edit Profile
-                        </Button>
-                      </Link>
-                      <Link to="/settings">
-                        <Button variant="ghost" size="sm">
-                          <FiSettings className="h-4 w-4" />
-                        </Button>
-                      </Link>
-                    </>
-                  ) : (
-                    <Button
-                      onClick={handleFollow}
-                      disabled={followLoading}
-                      variant={isFollowing ? "outline" : "default"}
-                      className={isFollowing ? "" : "bg-gradient-hero"}
-                    >
-                      {isFollowing ? (
-                        <>
-                          <FiUserCheck className="mr-2 h-4 w-4" />
-                          Following
-                        </>
-                      ) : (
-                        <>
-                          <FiUserPlus className="mr-2 h-4 w-4" />
-                          Follow
-                        </>
-                      )}
-                    </Button>
-                  )}
-                </div>
+              <div>
+                <p className="font-bold text-lg text-foreground">{profileData.followers_count}</p>
+                <p className="text-[10px] text-muted-foreground uppercase">Followers</p>
+              </div>
+              <div>
+                <p className="font-bold text-lg text-foreground">{profileData.following_count}</p>
+                <p className="text-[10px] text-muted-foreground uppercase">Following</p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        {/* Content Tabs */}
-        <Tabs defaultValue="posts" className="mt-6">
-          <TabsList className="w-full justify-start">
-            <TabsTrigger value="posts" className="flex items-center gap-2">
-              <FiGrid className="h-4 w-4" />
-              Posts
-            </TabsTrigger>
-            <TabsTrigger value="liked" className="flex items-center gap-2">
-              <FiHeart className="h-4 w-4" />
-              Liked
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="posts" className="mt-4">
-            {posts.length === 0 ? (
-              <Card>
-                <CardContent className="p-8 text-center">
-                  <GiMeditation className="mx-auto text-4xl text-muted-foreground mb-3" />
-                  <p className="text-muted-foreground">No posts yet</p>
-                  {isOwnProfile && (
-                    <Link to="/create-post">
-                      <Button className="mt-4 bg-gradient-hero">Create Your First Post</Button>
-                    </Link>
-                  )}
-                </CardContent>
-              </Card>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
-                {posts.map((post) => (
-                  <Link key={post.id} to={`/post/${post.id}`}>
-                    <Card className="aspect-square overflow-hidden group cursor-pointer">
-                      {post.thumbnail_url || post.media_url ? (
-                        <img
-                          src={post.thumbnail_url || post.media_url || ""}
-                          alt={post.caption || "Post"}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-muted p-4">
-                          <p className="text-sm text-muted-foreground line-clamp-4 text-center">
-                            {post.caption || "Text post"}
-                          </p>
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white">
-                        <span className="flex items-center gap-1">
-                          <FiHeart /> {post.likes_count}
-                        </span>
-                      </div>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
+        {/* Name & Bio */}
+        <div className="mb-3">
+          <div className="flex items-center gap-2">
+            <h1 className="text-lg font-bold text-foreground">
+              {profileData.display_name || "Anonymous"}
+            </h1>
+            {profileData.is_priest && profileData.priest_status === "approved" && (
+              <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-medium rounded-full bg-primary/10 text-primary">
+                <GiMeditation className="h-2.5 w-2.5" />
+                Priest
+              </span>
             )}
-          </TabsContent>
+          </div>
 
-          <TabsContent value="liked" className="mt-4">
-            <Card>
-              <CardContent className="p-8 text-center">
-                <FiHeart className="mx-auto text-4xl text-muted-foreground mb-3" />
-                <p className="text-muted-foreground">Liked posts will appear here</p>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+          {profileData.username && (
+            <p className="text-xs text-muted-foreground">@{profileData.username}</p>
+          )}
+
+          {profileData.bio && (
+            <p className="text-sm text-foreground mt-2">{profileData.bio}</p>
+          )}
+
+          <div className="flex flex-wrap gap-3 text-xs text-muted-foreground mt-2">
+            {profileData.location && (
+              <span className="flex items-center gap-1">
+                <FiMapPin className="h-3 w-3" />
+                {profileData.location}
+              </span>
+            )}
+            <span className="flex items-center gap-1">
+              <FiCalendar className="h-3 w-3" />
+              Joined {new Date(profileData.created_at).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+            </span>
+          </div>
+        </div>
+
+        {/* Action Button */}
+        {isOwnProfile ? (
+          <Link to="/profile/edit" className="block">
+            <Button variant="outline" className="w-full h-9 text-sm">
+              <FiEdit2 className="mr-2 h-3.5 w-3.5" />
+              Edit Profile
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            onClick={handleFollow}
+            disabled={followLoading}
+            className={`w-full h-9 text-sm ${isFollowing ? "" : "bg-gradient-hero"}`}
+            variant={isFollowing ? "outline" : "default"}
+          >
+            {isFollowing ? (
+              <>
+                <FiUserCheck className="mr-2 h-3.5 w-3.5" />
+                Following
+              </>
+            ) : (
+              <>
+                <FiUserPlus className="mr-2 h-3.5 w-3.5" />
+                Follow
+              </>
+            )}
+          </Button>
+        )}
       </div>
+
+      {/* Content Tabs */}
+      <Tabs defaultValue="posts" className="mt-4">
+        <TabsList className="w-full grid grid-cols-2 h-11 rounded-none border-b border-border bg-transparent">
+          <TabsTrigger 
+            value="posts" 
+            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:shadow-none"
+          >
+            <FiGrid className="h-5 w-5" />
+          </TabsTrigger>
+          <TabsTrigger 
+            value="liked"
+            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:shadow-none"
+          >
+            <FiHeart className="h-5 w-5" />
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="posts" className="mt-0">
+          {posts.length === 0 ? (
+            <div className="p-8 text-center">
+              <GiMeditation className="mx-auto text-4xl text-muted-foreground/30 mb-3" />
+              <p className="text-sm text-muted-foreground">No posts yet</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-0.5">
+              {posts.map((post) => (
+                <Link key={post.id} to={`/post/${post.id}`}>
+                  <div className="aspect-square overflow-hidden bg-muted relative">
+                    {post.thumbnail_url || post.media_url ? (
+                      <img
+                        src={post.thumbnail_url || post.media_url || ""}
+                        alt={post.caption || "Post"}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center p-2">
+                        <p className="text-[10px] text-muted-foreground line-clamp-3 text-center">
+                          {post.caption || "Post"}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </TabsContent>
+
+        <TabsContent value="liked" className="mt-0">
+          <div className="p-8 text-center">
+            <FiHeart className="mx-auto text-4xl text-muted-foreground/30 mb-3" />
+            <p className="text-sm text-muted-foreground">Liked posts will appear here</p>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
