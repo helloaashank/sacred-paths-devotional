@@ -53,8 +53,8 @@ export const useNotifications = () => {
             ...(notification.repeat === 'weekly' && { every: 'week' }),
           },
           sound: 'default',
-          smallIcon: 'ic_stat_icon_config_sample',
-          largeIcon: 'splash',
+          smallIcon: 'monochrome_icon',
+          largeIcon: 'logo',
         },
       ],
     };
