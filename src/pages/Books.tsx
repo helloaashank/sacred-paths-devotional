@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,8 @@ import { FiBook, FiShoppingCart, FiChevronDown } from "react-icons/fi";
 import booksData from "@/data/books.json";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PullToRefresh } from "@/components/PullToRefresh";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,8 +38,15 @@ const Books = () => {
       return 0;
     });
 
+  const handleRefresh = useCallback(async () => {
+    // Simulate refresh - in real app, this would refetch data
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    toast.success("Books refreshed");
+  }, []);
+
   return (
-    <div className="px-4 py-4">
+    <PullToRefresh onRefresh={handleRefresh} className="h-full">
+      <div className="px-4 py-4">
       {/* Filter & Sort Row */}
       <div className="flex items-center gap-2 mb-4">
         {/* Category Pills - Scrollable */}
@@ -129,7 +138,8 @@ const Books = () => {
           <p className="text-sm text-muted-foreground">{t.books.no_books}</p>
         </div>
       )}
-    </div>
+      </div>
+    </PullToRefresh>
   );
 };
 
