@@ -10,6 +10,12 @@ import { useToast } from "@/hooks/use-toast";
 import { FiEdit2, FiMapPin, FiCalendar, FiGrid, FiHeart, FiUserPlus, FiUserCheck } from "react-icons/fi";
 import { GiMeditation } from "react-icons/gi";
 
+interface PrivacySettings {
+  profile_visibility: 'public' | 'followers_only' | 'private';
+  followers_visible: boolean;
+  likes_visible: boolean;
+}
+
 interface ProfileData {
   id: string;
   user_id: string;
@@ -24,6 +30,7 @@ interface ProfileData {
   following_count: number;
   posts_count: number;
   created_at: string;
+  privacy_settings?: PrivacySettings | null;
 }
 
 interface Post {
@@ -67,9 +74,15 @@ const Profile = () => {
   const fetchProfileData = async () => {
     if (!targetUserId) return;
     
+    // Check authentication - profiles require auth now
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+    
     const { data, error } = await supabase
       .from("profiles")
-      .select("*")
+      .select("id, user_id, username, display_name, avatar_url, bio, location, is_priest, priest_status, followers_count, following_count, posts_count, created_at, privacy_settings")
       .eq("user_id", targetUserId)
       .maybeSingle();
 
@@ -80,8 +93,19 @@ const Profile = () => {
         title: "Error",
         description: "Could not load profile",
       });
-    } else {
-      setProfileData(data);
+    } else if (data) {
+      // Cast privacy_settings from JSON
+      const privacySettings = data.privacy_settings as unknown as PrivacySettings | null;
+      
+      // Filter sensitive data for non-owners based on privacy settings
+      const filteredData: ProfileData = {
+        ...data,
+        privacy_settings: privacySettings,
+        // Only show location if it's the user's own profile
+        location: isOwnProfile ? data.location : null,
+      };
+      
+      setProfileData(filteredData);
     }
     setLoading(false);
   };
