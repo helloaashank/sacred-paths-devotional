@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FiMusic, FiPlay, FiPause, FiDownload } from "react-icons/fi";
@@ -8,6 +8,8 @@ import { SyncedLyrics } from "@/components/SyncedLyrics";
 import { BhajanCredits } from "@/components/BhajanCredits";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAudio } from "@/contexts/AudioContext";
+import { PullToRefresh } from "@/components/PullToRefresh";
+import { toast } from "sonner";
 
 const Bhajans = () => {
   const [filter, setFilter] = useState<string>("all");
@@ -65,8 +67,15 @@ const Bhajans = () => {
     }
   };
 
+  const handleRefresh = useCallback(async () => {
+    // Simulate refresh - in real app, this would refetch data
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    toast.success("Bhajans refreshed");
+  }, []);
+
   return (
-    <div className="px-4 py-4">
+    <PullToRefresh onRefresh={handleRefresh} className="h-full">
+      <div className="px-4 py-4">
       {/* Compact Filter Pills - Horizontal Scroll */}
       <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-3 -mx-4 px-4 snap-x">
         {categories.map((category) => (
@@ -216,7 +225,8 @@ const Bhajans = () => {
           <p className="text-sm text-muted-foreground">{t.bhajans.no_bhajans}</p>
         </div>
       )}
-    </div>
+      </div>
+    </PullToRefresh>
   );
 };
 
