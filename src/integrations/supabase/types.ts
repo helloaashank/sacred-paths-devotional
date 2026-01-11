@@ -70,6 +70,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
           },
+          {
+            foreignKeyName: "comments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       followers: {
@@ -100,10 +107,24 @@ export type Database = {
             referencedColumns: ["user_id"]
           },
           {
+            foreignKeyName: "followers_follower_id_fkey"
+            columns: ["follower_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
             foreignKeyName: "followers_following_id_fkey"
             columns: ["following_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "followers_following_id_fkey"
+            columns: ["following_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
             referencedColumns: ["user_id"]
           },
         ]
@@ -140,6 +161,13 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
             referencedColumns: ["user_id"]
           },
         ]
@@ -198,6 +226,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
           },
+          {
+            foreignKeyName: "posts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       profiles: {
@@ -214,6 +249,7 @@ export type Database = {
           posts_count: number | null
           priest_details: Json | null
           priest_status: string | null
+          privacy_settings: Json | null
           updated_at: string
           user_id: string
           username: string | null
@@ -231,6 +267,7 @@ export type Database = {
           posts_count?: number | null
           priest_details?: Json | null
           priest_status?: string | null
+          privacy_settings?: Json | null
           updated_at?: string
           user_id: string
           username?: string | null
@@ -248,6 +285,7 @@ export type Database = {
           posts_count?: number | null
           priest_details?: Json | null
           priest_status?: string | null
+          privacy_settings?: Json | null
           updated_at?: string
           user_id?: string
           username?: string | null
@@ -256,10 +294,55 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          display_name: string | null
+          followers_count: number | null
+          following_count: number | null
+          id: string | null
+          is_priest: boolean | null
+          posts_count: number | null
+          user_id: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          followers_count?: number | null
+          following_count?: number | null
+          id?: string | null
+          is_priest?: boolean | null
+          posts_count?: number | null
+          user_id?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          followers_count?: number | null
+          following_count?: number | null
+          id?: string | null
+          is_priest?: boolean | null
+          posts_count?: number | null
+          user_id?: string | null
+          username?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      can_view_profile: {
+        Args: { _profile_user_id: string; _viewer_id: string }
+        Returns: boolean
+      }
+      has_user_liked_post: { Args: { _post_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
