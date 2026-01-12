@@ -28,6 +28,7 @@ import Search from "./pages/Search";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import PrivacySettings from "./pages/PrivacySettings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -115,6 +116,7 @@ const App = () => {
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/profile/:userId" element={<Profile />} />
                         <Route path="/profile/edit" element={<EditProfile />} />
+                        <Route path="/profile/privacy" element={<PrivacySettings />} />
                         <Route path="*" element={<NotFound />} />
                       </Routes>
                     </AppShell>

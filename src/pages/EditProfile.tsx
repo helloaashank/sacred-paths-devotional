@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { FiArrowLeft, FiCamera, FiSave } from "react-icons/fi";
+import { FiArrowLeft, FiCamera, FiSave, FiShield, FiChevronRight } from "react-icons/fi";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -204,6 +204,22 @@ const EditProfile = () => {
                 </>
               )}
             </Button>
+
+            {/* Privacy Settings Link */}
+            <Link to="/profile/privacy" className="block">
+              <div className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-muted/50 transition-colors">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-full bg-primary/10">
+                    <FiShield className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">Privacy Settings</p>
+                    <p className="text-xs text-muted-foreground">Control who can see your information</p>
+                  </div>
+                </div>
+                <FiChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+            </Link>
           </CardContent>
         </Card>
       </div>
