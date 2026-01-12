@@ -60,16 +60,25 @@ const Profile = () => {
   const targetUserId = userId || user?.id;
 
   useEffect(() => {
+    // Require authentication to view profiles
+    if (!user && !loading) {
+      navigate("/auth");
+      return;
+    }
+    
     if (!targetUserId) {
       navigate("/auth");
       return;
     }
-    fetchProfileData();
-    fetchPosts();
-    if (user && !isOwnProfile) {
-      checkFollowStatus();
+    
+    if (user) {
+      fetchProfileData();
+      fetchPosts();
+      if (!isOwnProfile) {
+        checkFollowStatus();
+      }
     }
-  }, [targetUserId, user]);
+  }, [targetUserId, user, loading]);
 
   const fetchProfileData = async () => {
     if (!targetUserId) return;
