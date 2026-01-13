@@ -6,10 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { FiArrowLeft, FiCamera, FiSave, FiShield, FiChevronRight } from "react-icons/fi";
+import { FiArrowLeft, FiCamera, FiSave, FiShield, FiChevronRight, FiLock } from "react-icons/fi";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -22,6 +23,12 @@ const EditProfile = () => {
   const [location, setLocation] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
   const [saving, setSaving] = useState(false);
+
+  // Password change state
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -76,6 +83,79 @@ const EditProfile = () => {
         description: "Your changes have been saved.",
       });
       navigate("/profile");
+    }
+  };
+
+  const handlePasswordChange = async () => {
+    if (!user?.email) return;
+
+    // Validation
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      toast({
+        variant: "destructive",
+        title: "Missing fields",
+        description: "Please fill in all password fields.",
+      });
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      toast({
+        variant: "destructive",
+        title: "Password too short",
+        description: "New password must be at least 6 characters.",
+      });
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast({
+        variant: "destructive",
+        title: "Passwords don't match",
+        description: "New password and confirmation must match.",
+      });
+      return;
+    }
+
+    setChangingPassword(true);
+
+    // First verify current password by re-authenticating
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email: user.email,
+      password: currentPassword,
+    });
+
+    if (signInError) {
+      setChangingPassword(false);
+      toast({
+        variant: "destructive",
+        title: "Incorrect password",
+        description: "Current password is incorrect.",
+      });
+      return;
+    }
+
+    // Update to new password
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    setChangingPassword(false);
+
+    if (updateError) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Could not update password. Please try again.",
+      });
+    } else {
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+      toast({
+        title: "Password updated",
+        description: "Your password has been changed successfully.",
+      });
     }
   };
 
@@ -204,6 +284,63 @@ const EditProfile = () => {
                 </>
               )}
             </Button>
+
+            <Separator className="my-2" />
+
+            {/* Password Change Section */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <FiLock className="h-4 w-4 text-muted-foreground" />
+                <h3 className="font-medium text-foreground">Change Password</h3>
+              </div>
+              
+              <div>
+                <Label htmlFor="current-password">Current Password</Label>
+                <Input
+                  id="current-password"
+                  type="password"
+                  placeholder="Enter current password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="new-password">New Password</Label>
+                <Input
+                  id="new-password"
+                  type="password"
+                  placeholder="Enter new password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Minimum 6 characters
+                </p>
+              </div>
+
+              <div>
+                <Label htmlFor="confirm-password">Confirm New Password</Label>
+                <Input
+                  id="confirm-password"
+                  type="password"
+                  placeholder="Confirm new password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
+
+              <Button
+                onClick={handlePasswordChange}
+                disabled={changingPassword || !currentPassword || !newPassword || !confirmPassword}
+                variant="outline"
+                className="w-full"
+              >
+                {changingPassword ? "Updating..." : "Update Password"}
+              </Button>
+            </div>
+
+            <Separator className="my-2" />
 
             {/* Privacy Settings Link */}
             <Link to="/profile/privacy" className="block">
