@@ -7,10 +7,21 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { FiArrowLeft, FiCamera, FiSave, FiShield, FiChevronRight, FiLock } from "react-icons/fi";
+import { FiArrowLeft, FiCamera, FiSave, FiShield, FiChevronRight, FiLock, FiEye, FiEyeOff, FiTrash2, FiAlertTriangle } from "react-icons/fi";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -29,6 +40,13 @@ const EditProfile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [changingPassword, setChangingPassword] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Account deletion state
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
+  const [deletingAccount, setDeletingAccount] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -155,6 +173,50 @@ const EditProfile = () => {
       toast({
         title: "Password updated",
         description: "Your password has been changed successfully.",
+      });
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!user) return;
+    
+    if (deleteConfirmText !== "DELETE") {
+      toast({
+        variant: "destructive",
+        title: "Confirmation required",
+        description: "Please type DELETE to confirm account deletion.",
+      });
+      return;
+    }
+
+    setDeletingAccount(true);
+
+    try {
+      // Delete user's profile data first (cascade should handle related data)
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .delete()
+        .eq("user_id", user.id);
+
+      if (profileError) {
+        throw profileError;
+      }
+
+      // Sign out the user (account deletion from auth.users requires admin or edge function)
+      await supabase.auth.signOut();
+      
+      toast({
+        title: "Account deleted",
+        description: "Your account data has been removed. You have been signed out.",
+      });
+      
+      navigate("/");
+    } catch (error) {
+      setDeletingAccount(false);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Could not delete account. Please try again or contact support.",
       });
     }
   };
@@ -296,24 +358,44 @@ const EditProfile = () => {
               
               <div>
                 <Label htmlFor="current-password">Current Password</Label>
-                <Input
-                  id="current-password"
-                  type="password"
-                  placeholder="Enter current password"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                />
+                <div className="relative">
+                  <Input
+                    id="current-password"
+                    type={showCurrentPassword ? "text" : "password"}
+                    placeholder="Enter current password"
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {showCurrentPassword ? <FiEyeOff className="h-4 w-4" /> : <FiEye className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
 
               <div>
                 <Label htmlFor="new-password">New Password</Label>
-                <Input
-                  id="new-password"
-                  type="password"
-                  placeholder="Enter new password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                />
+                <div className="relative">
+                  <Input
+                    id="new-password"
+                    type={showNewPassword ? "text" : "password"}
+                    placeholder="Enter new password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {showNewPassword ? <FiEyeOff className="h-4 w-4" /> : <FiEye className="h-4 w-4" />}
+                  </button>
+                </div>
                 <p className="text-xs text-muted-foreground mt-1">
                   Minimum 6 characters
                 </p>
@@ -321,13 +403,23 @@ const EditProfile = () => {
 
               <div>
                 <Label htmlFor="confirm-password">Confirm New Password</Label>
-                <Input
-                  id="confirm-password"
-                  type="password"
-                  placeholder="Confirm new password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
+                <div className="relative">
+                  <Input
+                    id="confirm-password"
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Confirm new password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {showConfirmPassword ? <FiEyeOff className="h-4 w-4" /> : <FiEye className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
 
               <Button
@@ -357,6 +449,68 @@ const EditProfile = () => {
                 <FiChevronRight className="h-5 w-5 text-muted-foreground" />
               </div>
             </Link>
+
+            <Separator className="my-2" />
+
+            {/* Danger Zone - Account Deletion */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <FiAlertTriangle className="h-4 w-4 text-destructive" />
+                <h3 className="font-medium text-destructive">Danger Zone</h3>
+              </div>
+              
+              <div className="p-4 rounded-lg border border-destructive/30 bg-destructive/5">
+                <p className="text-sm text-muted-foreground mb-4">
+                  Once you delete your account, there is no going back. All your data will be permanently removed.
+                </p>
+                
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive" className="w-full">
+                      <FiTrash2 className="mr-2 h-4 w-4" />
+                      Delete Account
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle className="flex items-center gap-2">
+                        <FiAlertTriangle className="h-5 w-5 text-destructive" />
+                        Delete Account
+                      </AlertDialogTitle>
+                      <AlertDialogDescription className="space-y-4">
+                        <p>
+                          This action cannot be undone. This will permanently delete your account and remove all your data from our servers.
+                        </p>
+                        <div className="space-y-2">
+                          <Label htmlFor="delete-confirm" className="text-foreground">
+                            Type <span className="font-bold">DELETE</span> to confirm:
+                          </Label>
+                          <Input
+                            id="delete-confirm"
+                            placeholder="DELETE"
+                            value={deleteConfirmText}
+                            onChange={(e) => setDeleteConfirmText(e.target.value.toUpperCase())}
+                            className="border-destructive/50 focus-visible:ring-destructive"
+                          />
+                        </div>
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel onClick={() => setDeleteConfirmText("")}>
+                        Cancel
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={handleDeleteAccount}
+                        disabled={deleteConfirmText !== "DELETE" || deletingAccount}
+                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                      >
+                        {deletingAccount ? "Deleting..." : "Delete Account"}
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
