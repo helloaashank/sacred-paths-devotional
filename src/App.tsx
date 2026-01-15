@@ -30,6 +30,9 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import PrivacySettings from "./pages/PrivacySettings";
 import SessionManagement from "./pages/SessionManagement";
+import CreatePost from "./pages/CreatePost";
+import Feed from "./pages/Feed";
+import PostDetail from "./pages/PostDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -119,6 +122,9 @@ const App = () => {
                         <Route path="/profile/edit" element={<EditProfile />} />
                         <Route path="/profile/privacy" element={<PrivacySettings />} />
                         <Route path="/profile/sessions" element={<SessionManagement />} />
+                        <Route path="/create" element={<CreatePost />} />
+                        <Route path="/feed" element={<Feed />} />
+                        <Route path="/post/:postId" element={<PostDetail />} />
                         <Route path="*" element={<NotFound />} />
                       </Routes>
                     </AppShell>

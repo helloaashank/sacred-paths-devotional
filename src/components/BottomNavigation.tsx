@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { FiHome, FiBook, FiMusic, FiCalendar, FiUser } from "react-icons/fi";
+import { FiHome, FiCompass, FiPlusSquare, FiMusic, FiUser } from "react-icons/fi";
 import { useAuth } from "@/contexts/AuthContext";
 
 const navItems = [
   { path: "/", icon: FiHome, label: "Home" },
-  { path: "/books", icon: FiBook, label: "Books" },
+  { path: "/feed", icon: FiCompass, label: "Feed" },
+  { path: "/create", icon: FiPlusSquare, label: "Create" },
   { path: "/bhajans", icon: FiMusic, label: "Bhajans" },
-  { path: "/panchang", icon: FiCalendar, label: "Panchang" },
 ];
 
 export const BottomNavigation = () => {
