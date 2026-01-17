@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FiChevronLeft, FiSun, FiMoon, FiShoppingCart, FiSearch } from "react-icons/fi";
 import { useCart } from "@/contexts/CartContext";
 import { Badge } from "@/components/ui/badge";
+import { NotificationsDropdown } from "@/components/NotificationsDropdown";
 
 interface AppHeaderProps {
   darkMode: boolean;
@@ -74,6 +75,8 @@ export const AppHeader = ({ darkMode, toggleDarkMode }: AppHeaderProps) => {
               <FiSearch className="h-5 w-5" />
             </Button>
           </Link>
+
+          <NotificationsDropdown />
           
           <Link to="/cart">
             <Button variant="ghost" size="icon" className="h-10 w-10 relative">
