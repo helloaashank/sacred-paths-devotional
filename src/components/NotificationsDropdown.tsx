@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
-import { FiBell, FiHeart, FiMessageCircle, FiUserPlus, FiCheck, FiTrash2 } from 'react-icons/fi';
+import { FiBell, FiHeart, FiMessageCircle, FiUserPlus, FiCheck, FiTrash2, FiZap } from 'react-icons/fi';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -14,7 +14,8 @@ import {
 import { useRealtimeNotifications, RealtimeNotification } from '@/hooks/useRealtimeNotifications';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
-
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 const NotificationIcon = ({ type }: { type: RealtimeNotification['type'] }) => {
   switch (type) {
     case 'like':
@@ -121,21 +122,54 @@ export const NotificationsDropdown = () => {
   const [open, setOpen] = useState(false);
   const { notifications, unreadCount, isLoading, markAsRead, markAllAsRead, deleteNotification } = useRealtimeNotifications();
 
+  // Test function to trigger a notification
+  const triggerTestNotification = async () => {
+    if (!user) return;
+    
+    const types = ['like', 'comment', 'follow'] as const;
+    const randomType = types[Math.floor(Math.random() * types.length)];
+    
+    const { error } = await supabase.from('notifications').insert({
+      user_id: user.id,
+      actor_id: user.id, // Self-notification for testing
+      type: randomType,
+      is_read: false,
+    });
+
+    if (error) {
+      toast.error('Failed to create test notification');
+    } else {
+      toast.success(`Test ${randomType} notification created!`);
+    }
+  };
+
   if (!user) return null;
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-10 w-10 relative">
-          <FiBell className="h-5 w-5" />
-          {unreadCount > 0 && (
-            <Badge className="absolute -top-0.5 -right-0.5 h-5 w-5 flex items-center justify-center p-0 bg-primary text-primary-foreground text-[10px]">
-              {unreadCount > 9 ? '9+' : unreadCount}
-            </Badge>
-          )}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-80 p-0" align="end">
+    <div className="flex items-center gap-1">
+      {/* Temporary test button */}
+      <Button 
+        variant="outline" 
+        size="icon" 
+        className="h-10 w-10"
+        onClick={triggerTestNotification}
+        title="Test Notification"
+      >
+        <FiZap className="h-5 w-5 text-yellow-500" />
+      </Button>
+
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button variant="ghost" size="icon" className="h-10 w-10 relative">
+            <FiBell className="h-5 w-5" />
+            {unreadCount > 0 && (
+              <Badge className="absolute -top-0.5 -right-0.5 h-5 w-5 flex items-center justify-center p-0 bg-primary text-primary-foreground text-[10px]">
+                {unreadCount > 9 ? '9+' : unreadCount}
+              </Badge>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-80 p-0" align="end">
         <div className="flex items-center justify-between p-3 border-b border-border">
           <h3 className="font-semibold text-foreground">Notifications</h3>
           {unreadCount > 0 && (
@@ -173,5 +207,6 @@ export const NotificationsDropdown = () => {
         </ScrollArea>
       </PopoverContent>
     </Popover>
+    </div>
   );
 };
