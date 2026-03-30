@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
@@ -24,6 +24,19 @@ export function useRealtimeNotifications() {
   const [notifications, setNotifications] = useState<RealtimeNotification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const notificationSound = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    notificationSound.current = new Audio('/audio/notification.wav');
+    notificationSound.current.volume = 0.5;
+  }, []);
+
+  const playNotificationSound = useCallback(() => {
+    if (notificationSound.current) {
+      notificationSound.current.currentTime = 0;
+      notificationSound.current.play().catch(() => {});
+    }
+  }, []);
 
   const fetchNotifications = useCallback(async () => {
     if (!user) {
