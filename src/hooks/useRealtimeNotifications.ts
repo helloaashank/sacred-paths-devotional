@@ -40,6 +40,43 @@ export function useRealtimeNotifications() {
     }
   }, []);
 
+  const sendLocalPushNotification = useCallback(async (notification: RealtimeNotification) => {
+    if (!Capacitor.isNativePlatform()) return;
+
+    try {
+      const permission = await LocalNotifications.checkPermissions();
+      if (permission.display !== 'granted') {
+        const request = await LocalNotifications.requestPermissions();
+        if (request.display !== 'granted') return;
+      }
+
+      const actorName = notification.actor?.display_name || notification.actor?.username || 'Someone';
+      const typeMessages: Record<string, string> = {
+        like: `${actorName} liked your post`,
+        comment: `${actorName} commented on your post`,
+        follow: `${actorName} started following you`,
+      };
+
+      await LocalNotifications.schedule({
+        notifications: [{
+          id: Math.floor(Math.random() * 2147483647),
+          title: notification.type === 'follow' ? 'New Follower' : 'New Activity',
+          body: typeMessages[notification.type] || 'You have a new notification',
+          sound: 'default',
+          smallIcon: 'monochrome_icon',
+          largeIcon: 'logo',
+          extra: {
+            type: notification.type,
+            postId: notification.post_id,
+            actorId: notification.actor_id,
+          },
+        }],
+      });
+    } catch (error) {
+      console.error('Failed to send local push notification:', error);
+    }
+  }, []);
+
   const fetchNotifications = useCallback(async () => {
     if (!user) {
       setNotifications([]);
