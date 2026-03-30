@@ -24,6 +24,19 @@ export function useRealtimeNotifications() {
   const [notifications, setNotifications] = useState<RealtimeNotification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const notificationSound = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    notificationSound.current = new Audio('/audio/notification.wav');
+    notificationSound.current.volume = 0.5;
+  }, []);
+
+  const playNotificationSound = useCallback(() => {
+    if (notificationSound.current) {
+      notificationSound.current.currentTime = 0;
+      notificationSound.current.play().catch(() => {});
+    }
+  }, []);
 
   const fetchNotifications = useCallback(async () => {
     if (!user) {
