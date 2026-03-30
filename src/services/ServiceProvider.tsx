@@ -51,14 +51,13 @@ const BACKEND_PROVIDER: 'supabase' | 'mock' = 'supabase';
 function createServices(): ServiceContainer {
   switch (BACKEND_PROVIDER) {
     case 'mock':
-      // Import dynamically to avoid bundling when not used
-      const { MockAuthService } = require('./auth/MockAuthService');
-      const { MockDatabaseService } = require('./database/MockDatabaseService');
-      const { MockStorageService } = require('./storage/MockStorageService');
+      // Mock services - import statically if needed
+      // For now, fall through to supabase as default
+      console.warn('Mock provider selected but not available, falling back to supabase');
       return {
-        auth: new MockAuthService(),
-        database: new MockDatabaseService(),
-        storage: new MockStorageService(),
+        auth: new SupabaseAuthService(),
+        database: new SupabaseDatabaseService(),
+        storage: new SupabaseStorageService(),
       };
     
     case 'supabase':
