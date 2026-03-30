@@ -203,9 +203,11 @@ export function useRealtimeNotifications() {
             .maybeSingle();
 
           if (data) {
-            setNotifications(prev => [data as RealtimeNotification, ...prev]);
+            const fullNotification = data as RealtimeNotification;
+            setNotifications(prev => [fullNotification, ...prev]);
             setUnreadCount(prev => prev + 1);
             playNotificationSound();
+            sendLocalPushNotification(fullNotification);
           }
         }
       )
