@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
+import { LocalNotifications } from '@capacitor/local-notifications';
+import { Capacitor } from '@capacitor/core';
 
 export interface RealtimeNotification {
   id: string;
@@ -35,6 +37,43 @@ export function useRealtimeNotifications() {
     if (notificationSound.current) {
       notificationSound.current.currentTime = 0;
       notificationSound.current.play().catch(() => {});
+    }
+  }, []);
+
+  const sendLocalPushNotification = useCallback(async (notification: RealtimeNotification) => {
+    if (!Capacitor.isNativePlatform()) return;
+
+    try {
+      const permission = await LocalNotifications.checkPermissions();
+      if (permission.display !== 'granted') {
+        const request = await LocalNotifications.requestPermissions();
+        if (request.display !== 'granted') return;
+      }
+
+      const actorName = notification.actor?.display_name || notification.actor?.username || 'Someone';
+      const typeMessages: Record<string, string> = {
+        like: `${actorName} liked your post`,
+        comment: `${actorName} commented on your post`,
+        follow: `${actorName} started following you`,
+      };
+
+      await LocalNotifications.schedule({
+        notifications: [{
+          id: Math.floor(Math.random() * 2147483647),
+          title: notification.type === 'follow' ? 'New Follower' : 'New Activity',
+          body: typeMessages[notification.type] || 'You have a new notification',
+          sound: 'default',
+          smallIcon: 'monochrome_icon',
+          largeIcon: 'logo',
+          extra: {
+            type: notification.type,
+            postId: notification.post_id,
+            actorId: notification.actor_id,
+          },
+        }],
+      });
+    } catch (error) {
+      console.error('Failed to send local push notification:', error);
     }
   }, []);
 
@@ -164,9 +203,11 @@ export function useRealtimeNotifications() {
             .maybeSingle();
 
           if (data) {
-            setNotifications(prev => [data as RealtimeNotification, ...prev]);
+            const fullNotification = data as RealtimeNotification;
+            setNotifications(prev => [fullNotification, ...prev]);
             setUnreadCount(prev => prev + 1);
             playNotificationSound();
+            sendLocalPushNotification(fullNotification);
           }
         }
       )
@@ -194,7 +235,7 @@ export function useRealtimeNotifications() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [user, fetchNotifications]);
+  }, [user, fetchNotifications, playNotificationSound, sendLocalPushNotification]);
 
   return {
     notifications,
