@@ -235,7 +235,7 @@ export function useRealtimeNotifications() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [user, fetchNotifications]);
+  }, [user, fetchNotifications, playNotificationSound, sendLocalPushNotification]);
 
   return {
     notifications,
