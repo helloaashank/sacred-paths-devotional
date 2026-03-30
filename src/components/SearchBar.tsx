@@ -21,7 +21,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ expanded = false, onClose, classN
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     setRecentSearches(searchService.getRecentSearches());

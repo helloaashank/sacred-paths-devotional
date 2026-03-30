@@ -166,6 +166,7 @@ export function useRealtimeNotifications() {
           if (data) {
             setNotifications(prev => [data as RealtimeNotification, ...prev]);
             setUnreadCount(prev => prev + 1);
+            playNotificationSound();
           }
         }
       )

@@ -52,9 +52,9 @@ function createServices(): ServiceContainer {
   switch (BACKEND_PROVIDER) {
     case 'mock':
       // Import dynamically to avoid bundling when not used
-      const { MockAuthService } = require('./auth/MockAuthService');
-      const { MockDatabaseService } = require('./database/MockDatabaseService');
-      const { MockStorageService } = require('./storage/MockStorageService');
+      const { MockAuthService } = await import('./auth/MockAuthService');
+      const { MockDatabaseService } = await import('./database/MockDatabaseService');
+      const { MockStorageService } = await import('./storage/MockStorageService');
       return {
         auth: new MockAuthService(),
         database: new MockDatabaseService(),
